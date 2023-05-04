@@ -6,7 +6,7 @@ function InputInitialPages(props) {
 
     return (
         <div>
-            <input
+            <input className='input-initial-page'
                 type="text"
                 name={name}
                 placeholder={placeholder}

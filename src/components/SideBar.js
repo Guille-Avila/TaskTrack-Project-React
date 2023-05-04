@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import logo from "../assets/images/logo-slogan.png";
 import DropList from "./DropList";
 import "../assets/style/SideBar.css";
-import { FaRegAddressBook, FaRegCalendarCheck, FaRegCalendarTimes, FaRegCheckCircle } from 'react-icons/fa';
+import { FaRegAddressBook, FaRegCalendarCheck, FaRegCalendarTimes, FaRegCheckCircle, FaRegUserCircle, FaSignInAlt } from 'react-icons/fa';
 import { HiUserGroup } from "react-icons/hi";
 
 
@@ -14,15 +14,16 @@ const navLinks = [
     { to: '/done', icon: <FaRegCheckCircle />, text: 'Done' },
 ];
 
-const dataGroups = <ul className="dropdown-list">
-    <li><HiUserGroup /><NavLink to="#" acti>Group 1</NavLink></li>
-    <li><HiUserGroup /><NavLink to="#" acti>Group 2</NavLink></li>
+const dataGroups = <ul>
+    <li><NavLink to="#" acti><HiUserGroup />Group 1</NavLink></li>
+    <li><NavLink to="#" acti><HiUserGroup />Group 2</NavLink></li>
 </ul>;
 
-const dataLists = <ul className="dropdown-list">
-    <li><NavLink to="#" acti>List 1</NavLink></li>
-    <li><NavLink to="#" acti>List 2</NavLink></li>
+const dataLists = <ul>
+    <li><NavLink to="#" acti><div class="square" />List 1</NavLink></li>
+    <li><NavLink to="#" acti><div class="square" />List 2</NavLink></li>
 </ul>;
+
 
 function SideBar() {
     return (
@@ -42,11 +43,14 @@ function SideBar() {
                 ))}
             </ul>
 
-            <DropList name="Groups" action="Add Group" data={dataGroups}></DropList>
-            <DropList name="Lists" action="Add List" data={dataLists}></DropList>
-            <ul>
-                <li><NavLink to="/account" acti>Account</NavLink></li>
-                <li><NavLink to="/login">Sign out</NavLink></li>
+            <div className='container-droplist'>
+                <DropList name="Groups" action="Add Group" data={dataGroups}></DropList>
+                <DropList name="Lists" action="Add List" data={dataLists}></DropList>
+            </div>
+
+            <ul className='footer-sidebar'>
+                <li><NavLink className='link-nav-bar' to="/account" acti><FaRegUserCircle />Account</NavLink></li>
+                <li><NavLink className='link-nav-bar' to="/login"><FaSignInAlt />Sign out</NavLink></li>
 
             </ul>
 

@@ -1,45 +1,48 @@
 .container-side-bar {
+  display: flex;
+  flex-direction: column;
   width: 23%;
   min-width: 300px;
-  background-color: bisque;
+  background-color: #e6d435;
   height: 100vh;
+  overflow-y: auto;
 }
 
+/* logo slogan ------------------- */
+
 .logo-slogan-side-bar {
-  padding: 10% 15% 8% 10%;
+  padding: 10% 15% 7% 10%;
   width: auto;
-  background-color: rgb(207, 158, 232);
+  font-size: 14px;
 }
 
 .logo-slogan-side-bar > img {
   width: 100%;
 }
 
+/* nav bar --------------------- */
+
 .nav-bar {
-  display: flex;
-  flex-direction: column;
   list-style: none;
-  margin-top: 0;
   padding: 0;
-  font-size: 14px;
+  margin-top: 0;
   align-items: center;
 }
 
 .nav-bar li {
-  width: 90%;
+  width: 87%;
+  margin: auto;
   display: flex;
-  background-color: rgb(237, 145, 217);
 }
 
 .link-nav-bar {
   width: 100%;
-  padding: 11px 0px 11px 7%;
+  padding: 11.5px 0px 11.5px 7%;
   display: flex;
   align-items: center;
   height: 100%;
   color: black;
   text-decoration: none;
-  background-color: aqua;
   border-radius: 10px;
 }
 
@@ -49,11 +52,24 @@
   height: 20px;
 }
 
-/* Dropdown style --------------- */
+.link-nav-bar.active {
+  color: white;
+  background-color: #b9a702;
+}
+
+.link-nav-bar.active svg {
+  color: black;
+}
+
+/* lists --------------- */
+
+.container-droplist {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
 
 .dropdown-sidebar {
-  background-color: rgb(203, 178, 227);
-  width: 90%;
+  width: 87%;
   margin: auto;
   border-bottom: 1px solid #b9a702;
 }
@@ -92,11 +108,55 @@
 .dropdown-container-list {
   background-color: white;
   border-radius: 10px;
-  border: 1px solid;
   max-height: 130px;
+  padding: 10px 0px;
+  width: 100%;
+  overflow: hidden;
 }
 
-.dropdown-list {
+.dropdown-container-list * {
+  width: 100%;
+  text-decoration: none;
+  color: black;
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown-container-list * * {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 1.8% 3%;
+}
+
+.dropdown-container-list .square {
+  background-color: blue;
+  height: 10px;
+  width: 4px;
+  margin-right: 7px;
+}
+
+.dropdown-container-list svg {
+  padding: 0;
+}
+
+/* footer sidebar ------------------------- */
+
+.footer-sidebar {
   list-style: none;
   padding: 0;
+  margin-top: auto;
+  margin-bottom: 25px;
+}
+
+.footer-sidebar li {
+  margin: auto;
+  width: 87%;
+  display: flex;
+}
+
+.footer-sidebar svg {
+  margin-right: 10px;
+  width: 20px;
+  height: 20px;
 }
