@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import logo from "../assets/images/logo-slogan.png";
 import DropList from "./DropList";
 import "../assets/style/SideBar.css";
@@ -29,7 +29,7 @@ function SideBar() {
     return (
         <div className="container-side-bar">
             <div className="logo-slogan-side-bar">
-                <img src={logo} alt="logo" />
+                <Link to="/home"><img src={logo} alt="logo" to="/home"/></Link>
             </div>
 
             <ul className='nav-bar'>

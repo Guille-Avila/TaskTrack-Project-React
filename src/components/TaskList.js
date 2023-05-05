@@ -33,7 +33,7 @@ const TaskList = ({ tasks, taskMessage }) => {
                             </button>
                         </div>
                         : <div className='task-actions'>
-                            <Link className='edit-task'>Edit</Link>
+                            <Link className='edit-task' to='/add-edit-task'>Edit</Link>
                             <button className='done-task'>Done</button>
                         </div>}
 

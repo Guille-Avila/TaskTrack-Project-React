@@ -16,7 +16,7 @@
   font-size: 14px;
 }
 
-.logo-slogan-side-bar > img {
+.logo-slogan-side-bar * {
   width: 100%;
 }
 

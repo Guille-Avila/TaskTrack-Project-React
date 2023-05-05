@@ -7,6 +7,8 @@ import Home from "./pages/Home";
 import Today from "./pages/Today";
 import DueTasks from "./pages/DueTasks";
 import Done from "./pages/Done";
+import Account from "./pages/Account";
+import AddEditTask from "./pages/AddEditTask";
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
         <Route path="/today" element={<Today />} />
         <Route path="/due-tasks" element={<DueTasks />} />
         <Route path="/done" element={<Done />} />
+        <Route path="/account" element={<Account />} />
+        <Route path="/add-edit-task" element={<AddEditTask />} />
       </Routes>
     </BrowserRouter>
   );

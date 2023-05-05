@@ -3,10 +3,8 @@ import SideBar from "../components/SideBar"
 import InterfaceTasks from '../components/InterfaceTasks';
 import "../assets/style/Home.css";
 
-const title = "Welcome User!"
-
+const title = "Welcome User!";
 const buttons = ['Priority', 'Creation Date', 'Due Date'];
-
 const tasks = [
     {
         name: 'Task No. 1',

@@ -1,0 +1,73 @@
+.add-edit-task-form {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.add-edit-task-form-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.add-edit-task-form-header button {
+  padding: 20px 30px;
+  border-radius: 10px;
+  border: none;
+  background-color: #d42745;
+  color: white;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.add-edit-task-form-header svg {
+  margin-right: 10px;
+  font-size: 20px;
+  margin-bottom: 3px;
+  color: black;
+}
+
+.title-task-form {
+  width: 66%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 7px;
+}
+
+.title-task-form h3 {
+  margin-left: 10px;
+  margin-right: 15px;
+}
+
+.title-task-form input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 15px;
+  border-radius: 10px;
+  border: 1px solid;
+  font-size: 14px;
+}
+
+.textarea-task-form {
+  width: 100%;
+  height: 150px;
+  resize: none;
+  padding: 12px 15px;
+  border-radius: 10px;
+  border: 1px solid;
+  font-size: 14px;
+  font-family: "Inter";
+}
+
+.textarea-task-form::placeholder {
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.date-priority-task-form {
+  width: 33%;
+}
+
+.list-task-form {
+  width: 33%;
+}
