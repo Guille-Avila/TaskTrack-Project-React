@@ -3,6 +3,8 @@
   flex-wrap: wrap;
 }
 
+/* header ------------------- */
+
 .add-edit-task-form-header {
   width: 100%;
   display: flex;
@@ -19,6 +21,7 @@
   font-size: 16px;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .add-edit-task-form-header svg {
@@ -27,6 +30,8 @@
   margin-bottom: 3px;
   color: black;
 }
+
+/*  title and description -------------------------------------- */
 
 .title-task-form {
   width: 66%;
@@ -38,6 +43,7 @@
 .title-task-form h3 {
   margin-left: 10px;
   margin-right: 15px;
+  white-space: nowrap;
 }
 
 .title-task-form input {
@@ -58,16 +64,168 @@
   border: 1px solid;
   font-size: 14px;
   font-family: "Inter";
+  margin-bottom: 5px;
 }
 
 .textarea-task-form::placeholder {
   color: rgba(0, 0, 0, 0.3);
 }
 
-.date-priority-task-form {
-  width: 33%;
-}
+/* date and priority -------------------- */
 
+.date-priority-task-form,
 .list-task-form {
   width: 33%;
+  padding-right: 15px;
+  box-sizing: border-box;
+}
+
+.date-priority-task-form h3 {
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+
+.date-priority-task-form .input-date {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px 15px;
+  border-radius: 10px;
+  border: 1px solid;
+  font-size: 14px;
+}
+
+.date-priority-task-form div {
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 12px 12px;
+  height: 92px;
+}
+
+.date-priority-task-form label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.date-priority-task-form input {
+  margin-right: 10px;
+  margin-bottom: 2px;
+}
+
+.date-priority-task-form label .circle1,
+.date-priority-task-form label .circle2,
+.date-priority-task-form label .circle3 {
+  width: 18px;
+  height: 18px;
+  margin-left: 8px;
+}
+
+.date-priority-task-form label .circle1 {
+  color: #38e635;
+}
+
+.date-priority-task-form label .circle2 {
+  color: #f6a811;
+}
+
+.date-priority-task-form label .circle3 {
+  color: #f52f52;
+}
+
+/* lists ---------------- */
+
+.list-task-form h3 {
+  margin: 0;
+  margin-left: 10px;
+}
+
+.list-task-form > div:nth-child(1) {
+  margin-top: 20px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.list-task-form > div:nth-child(2) {
+  border: 1px solid black;
+  border-radius: 10px;
+  height: 205px;
+}
+
+.list-task-form ul {
+  list-style: none;
+  padding: 0;
+}
+
+.list-task-form li {
+  margin-bottom: 15px;
+  padding-left: 15px;
+}
+
+.list-task-form li * {
+  display: flex;
+  align-items: center;
+  color: black;
+  text-decoration: none;
+}
+
+.list-task-form .square {
+  background-color: blue;
+  height: 20px;
+  width: 20px;
+  margin-right: 10px;
+}
+
+/* Groups ----------------------- */
+
+.group-task-form {
+  width: 34%;
+}
+
+.group-task-form h3 {
+  margin: 0;
+  margin-left: 10px;
+}
+
+.group-task-form div:nth-child(1) {
+  margin-top: 20px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.group-task-form div:nth-child(2) {
+  border: 1px solid black;
+  border-radius: 10px;
+  height: 205px;
+}
+
+.group-task-form ul {
+  list-style: none;
+  padding: 0px;
+}
+
+.group-task-form li {
+  margin-bottom: 15px;
+  padding-left: 15px;
+}
+
+.group-task-form li * {
+  display: flex;
+  align-items: center;
+  color: black;
+  text-decoration: none;
+}
+
+.group-task-form svg,
+.list-task-form svg {
+  height: 20px;
+  width: 20px;
+  margin-right: 5px;
+}
+
+.group-task-form div:nth-child(2) svg {
+  margin-right: 10px;
 }

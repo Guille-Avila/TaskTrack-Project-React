@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const TaskList = ({ tasks, taskMessage }) => {
 
-    const currentUrl = window.location.pathname;
+    const currentUrl = window.location.pathname; 
 
     return (
         <div className='all-tasks'>
@@ -19,7 +19,7 @@ const TaskList = ({ tasks, taskMessage }) => {
                         <div className='details-tasks'>
                             <div className='priority'>
                                 <p>Priority &nbsp; </p>
-                                <BsFillCircleFill className='circle' />
+                                <BsFillCircleFill className='circle' /> 
                             </div>
                             <p><i>Due Date</i> &nbsp; {task.dueDate}</p>
                         </div>

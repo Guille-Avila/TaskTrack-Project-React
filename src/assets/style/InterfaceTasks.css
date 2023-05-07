@@ -5,7 +5,6 @@
   flex-direction: column;
 }
 
-
 /* header ---------------- */
 
 .header-tasks {
@@ -14,13 +13,20 @@
   align-items: center;
 }
 
-.header-tasks h1 {
-  width: 50%;
+.header-tasks > div {
+  display: flex;
 }
+
+.header-tasks h1 {
+  white-space: nowrap;
+  margin-right: 20px;
+}
+
 .search-bar {
   width: 50%;
   display: flex;
   align-items: center;
+  margin-left: auto;
 }
 
 .search-bar input {
@@ -118,7 +124,6 @@
 .details-tasks .circle {
   width: 20px;
   height: 20px;
-  border-radius: 50%;
   color: red;
 }
 
