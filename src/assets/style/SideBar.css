@@ -16,7 +16,7 @@
   font-size: 14px;
 }
 
-.logo-slogan-side-bar > img {
+.logo-slogan-side-bar * {
   width: 100%;
 }
 
@@ -112,6 +112,7 @@
   padding: 10px 0px;
   width: 100%;
   overflow: hidden;
+  padding-bottom: 12px;
 }
 
 .dropdown-container-list * {
@@ -126,14 +127,22 @@
   width: 100%;
   display: flex;
   align-items: center;
-  padding: 1.8% 3%;
 }
 
 .dropdown-container-list .square {
   background-color: blue;
-  height: 10px;
-  width: 4px;
-  margin-right: 7px;
+  height: 20px;
+  width: 20px;
+  margin-right: 10px;
+}
+
+.link-drop-list {
+  padding: 10px 15px;
+}
+
+.link-drop-list.active {
+  background-color: #e6d435;
+  box-shadow: inset 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 .dropdown-container-list svg {

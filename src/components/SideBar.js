@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import logo from "../assets/images/logo-slogan.png";
 import DropList from "./DropList";
 import "../assets/style/SideBar.css";
@@ -15,13 +15,13 @@ const navLinks = [
 ];
 
 const dataGroups = <ul>
-    <li><NavLink to="#" acti><HiUserGroup />Group 1</NavLink></li>
-    <li><NavLink to="#" acti><HiUserGroup />Group 2</NavLink></li>
+    <li><NavLink to="/group/1" className='link-drop-list'><HiUserGroup />Group 1</NavLink></li>
+    <li><NavLink to="/group/2" className='link-drop-list'><HiUserGroup />Group 2</NavLink></li>
 </ul>;
 
 const dataLists = <ul>
-    <li><NavLink to="#" acti><div class="square" />List 1</NavLink></li>
-    <li><NavLink to="#" acti><div class="square" />List 2</NavLink></li>
+    <li><NavLink to="/list/1" className='link-drop-list'><div className="square" />List 1</NavLink></li>
+    <li><NavLink to="/list/2" className='link-drop-list'><div className="square" />List 2</NavLink></li>
 </ul>;
 
 
@@ -29,7 +29,7 @@ function SideBar() {
     return (
         <div className="container-side-bar">
             <div className="logo-slogan-side-bar">
-                <img src={logo} alt="logo" />
+                <Link to="/home"><img src={logo} alt="logo" to="/home" /></Link>
             </div>
 
             <ul className='nav-bar'>

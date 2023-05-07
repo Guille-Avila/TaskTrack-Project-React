@@ -1,0 +1,91 @@
+.form-account {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.form-account h1 {
+  width: 100%;
+  margin-bottom: 45px;
+}
+
+.form-account h3 {
+  margin-left: 7px;
+  margin-bottom: 10px;
+  margin-top: 0;
+}
+
+.form-account div {
+  width: 50%;
+  margin-bottom: 15px;
+}
+
+.form-account div input {
+  width: 97%;
+  box-sizing: border-box;
+  padding: 17px 15px;
+  border-radius: 10px;
+  border: 1px solid;
+  font-size: 14px;
+}
+
+.form-account .change-password,
+.form-account .delete-account {
+  width: 100%;
+}
+
+.form-account .change-password {
+  margin-top: 35px;
+}
+
+.form-account .change-password button {
+  width: 48.5%;
+  font-size: 16px;
+  color: white;
+  background-color: #b9a702;
+  padding: 15px;
+  border-radius: 10px;
+  border: none;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+}
+
+.form-account .delete-account {
+  margin-top: 5px;
+}
+
+.form-account .delete-account button {
+  width: 25%;
+  font-size: 14px;
+  color: white;
+  background-color: #d42745;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+}
+
+.cancel-update {
+  width: 100%;
+  margin-top: auto;
+  margin-bottom: 5px;
+}
+
+.cancel-update button {
+  width: 48.5%;
+  margin-right: 1.5%;
+  padding: 20px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: none;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  color: white;
+  background-color: #04c300;
+}
+
+.cancel-update button:first-child {
+  background-color: #d42745;
+}

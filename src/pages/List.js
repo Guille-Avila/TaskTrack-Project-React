@@ -26,7 +26,7 @@ const tasks = [
 const taskMessage = "These are all your pending tasks!"
 
 
-function Home() {
+function List() {
 
     return (
         <div className='container-sidebar-interface'>
@@ -36,4 +36,4 @@ function Home() {
     );
 }
 
-export default Home;
+export default List;
