@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import logo from "../assets/images/logo-slogan.png";
 import DropList from "./DropList";
+import { DropListProvider } from './DropListContext';
 import "../assets/style/SideBar.css";
 import { FaRegAddressBook, FaRegCalendarCheck, FaRegCalendarTimes, FaRegCheckCircle, FaRegUserCircle, FaSignInAlt } from 'react-icons/fa';
 import { HiUserGroup } from "react-icons/hi";
-
 
 const navLinks = [
     { to: '/home', icon: <FaRegAddressBook />, text: 'All Tasks' },
@@ -43,10 +43,12 @@ function SideBar() {
                 ))}
             </ul>
 
+
             <div className='container-droplist'>
                 <DropList name="Groups" action="Add Group" data={dataGroups}></DropList>
                 <DropList name="Lists" action="Add List" data={dataLists}></DropList>
             </div>
+
 
             <ul className='footer-sidebar'>
                 <li><NavLink className='link-nav-bar' to="/account" acti><FaRegUserCircle />Account</NavLink></li>

@@ -12,25 +12,28 @@ import AddEditTask from "./pages/AddEditTask";
 import AddEditGroup from "./pages/AddEditGroup";
 import Group from "./pages/Group";
 import List from "./pages/List";
+import { DropListProvider } from './components/DropListContext';
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/recover-password" element={<RecoverPassword />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/today" element={<Today />} />
-        <Route path="/due-tasks" element={<DueTasks />} />
-        <Route path="/done" element={<Done />} />
-        <Route path="/account" element={<Account />} />
-        <Route path="/add-edit-task" element={<AddEditTask />} />
-        <Route path="/add-edit-group" element={<AddEditGroup />} />
-        <Route path="/group/:id" element={<Group />} />
-        <Route path="/list/:id" element={<List />} />
-      </Routes>
+      <DropListProvider>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/recover-password" element={<RecoverPassword />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/today" element={<Today />} />
+          <Route path="/due-tasks" element={<DueTasks />} />
+          <Route path="/done" element={<Done />} />
+          <Route path="/account" element={<Account />} />
+          <Route path="/add-edit-task" element={<AddEditTask />} />
+          <Route path="/add-edit-group" element={<AddEditGroup />} />
+          <Route path="/group/:id" element={<Group />} />
+          <Route path="/list/:id" element={<List />} />
+        </Routes>
+      </DropListProvider>
     </BrowserRouter>
   );
 }
