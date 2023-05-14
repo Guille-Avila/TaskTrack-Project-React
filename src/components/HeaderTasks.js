@@ -1,25 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { FaSearch, FaEdit } from 'react-icons/fa';
+import ListForm from './ListForm';
 
 const HeaderTasks = ({ title }) => {
 
+  const [showListForm, setShowListForm] = useState(false);
   const currentUrl = window.location.pathname;
   const navigate = useNavigate();
 
+  const handleListForm = () => {
+    setShowListForm(!showListForm);
+  };
+
   let buttonText = "";
   let destination = "";
+  let page = '';
 
   if (currentUrl.startsWith('/group')) {
     buttonText = "Edit Group";
     destination = "/add-edit-group";
   } else if (currentUrl.startsWith('/list')) {
     buttonText = "Edit List";
-    destination = "/add-edit-list";
+    // destination = "/add-edit-list";
+    page = 'list'
   }
 
   const handleClick = () => {
-    navigate(destination);
+    currentUrl.startsWith('/group') ? navigate(destination) : setShowListForm(!showListForm);
   };
 
   return (
@@ -35,6 +43,9 @@ const HeaderTasks = ({ title }) => {
               <FaEdit />
               {buttonText}
             </button>
+
+            <ListForm show={showListForm} handleButtonClick={handleListForm} title={title} page={page}></ListForm >
+
           </div>
         }
       </div>

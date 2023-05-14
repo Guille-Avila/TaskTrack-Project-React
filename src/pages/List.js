@@ -31,7 +31,7 @@ function List() {
     return (
         <div className='container-sidebar-interface'>
             <SideBar />
-            <InterfaceTasks title={title} buttons={buttons} tasks={tasks} taskMessage={taskMessage}/>
+            <InterfaceTasks title={title} buttons={buttons} tasks={tasks} taskMessage={taskMessage} />
         </div>
     );
 }

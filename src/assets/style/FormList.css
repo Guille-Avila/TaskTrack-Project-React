@@ -1,0 +1,88 @@
+.box-form-list {
+  /* visibility: hidden; */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px 50px;
+  background-color: rgba(0, 0, 0, 0.8);
+  box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  border-radius: 10px;
+  text-align: center;
+  z-index: 9999;
+  width: 250px;
+}
+
+.box-form-list h3 {
+  margin-top: 12px;
+  width: 100%;
+}
+
+.box-form-list input {
+  box-sizing: border-box;
+  padding: 15px 20px;
+  border-radius: 10px;
+  margin-bottom: 5px;
+}
+
+.box-form-list div {
+  display: flex;
+  margin-bottom: 5px;
+  justify-content: center;
+}
+
+.box-form-list div button {
+  all: unset;
+  width: 100px;
+  height: 50px;
+  border-radius: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 5px;
+  margin-bottom: 12px;
+  font-size: 16px;
+  text-decoration: none;
+  border: none;
+  box-shadow: 4px 4px 9px rgba(0, 0, 0, 0.25);
+  color: white;
+  cursor: pointer;
+}
+
+.box-form-list button:nth-child(1) {
+  background-color: #d42745;
+}
+
+.box-form-list button:nth-child(2) {
+  background-color: #04c300;
+}
+
+.box-form-list .delete {
+  all: unset;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 210px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #d42745;
+  box-sizing: border-box;
+  border-radius: 10px;
+  margin: 0px 5px;
+  overflow: hidden;
+  margin: auto;
+  margin-bottom: 2px;
+  padding: 8px;
+}
+
+.box-form-list > button p {
+  margin: 0;
+  margin-bottom: 2px;
+  font-size: 14px;
+}
+
+.box-form-list > button svg {
+  margin-right: 8px;
+  color: white;
+  width: 15px;
+}

@@ -143,6 +143,7 @@
 .link-drop-list.active {
   background-color: #e6d435;
   box-shadow: inset 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  
 }
 
 .dropdown-container-list svg {

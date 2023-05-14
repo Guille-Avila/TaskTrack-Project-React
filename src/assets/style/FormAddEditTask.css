@@ -12,7 +12,7 @@
   justify-content: space-between;
 }
 
-.add-edit-task-form-header button {
+.add-edit-task-form-header > button {
   padding: 20px 30px;
   border-radius: 10px;
   border: none;
@@ -29,6 +29,51 @@
   font-size: 20px;
   margin-bottom: 3px;
   color: black;
+}
+
+.message-box-delete {
+  visibility: hidden;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px 50px;
+  background-color: rgba(0, 0, 0, 0.7);
+  box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  border-radius: 10px;
+  text-align: center;
+  z-index: 9999;
+}
+
+.message-box-delete div {
+  display: flex;
+  justify-content: center;
+}
+
+.message-box-delete button {
+  justify-content: center;
+  width: 100px;
+  height: 50px;
+  border-radius: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 5px;
+  margin-bottom: 12px;
+  font-size: 16px;
+  text-decoration: none;
+  border: none;
+  box-shadow: 4px 4px 9px rgba(0, 0, 0, 0.25);
+  color: white;
+  cursor: pointer;
+}
+
+.message-box-delete button:nth-child(1) {
+  background-color: #d42745;
+}
+
+.message-box-delete button:nth-child(2) {
+  background-color: #04c300;
 }
 
 /*  title and description -------------------------------------- */
@@ -97,38 +142,44 @@
 .date-priority-task-form div {
   border: 1px solid black;
   border-radius: 10px;
-  padding: 12px 12px;
-  height: 92px;
+  padding-top: 6px;
+  padding-bottom: 9px;
 }
 
-.date-priority-task-form label {
+.date-priority-task-form button {
+  all: unset;
+  width: 100%;
   display: flex;
   align-items: center;
   margin-bottom: 15px;
+  padding: 8px 15px;
+  font-size: 14px;
+  margin: 0;
+  box-sizing: border-box;
+  cursor: pointer;
 }
 
-.date-priority-task-form input {
-  margin-right: 10px;
-  margin-bottom: 2px;
+.date-priority-task-form button.selected {
+  box-shadow: inset 0px 0px 8px 2px rgba(0, 0, 0, 0.3);
 }
 
-.date-priority-task-form label .circle1,
-.date-priority-task-form label .circle2,
-.date-priority-task-form label .circle3 {
+.date-priority-task-form button .circle1,
+.date-priority-task-form button .circle2,
+.date-priority-task-form button .circle3 {
   width: 18px;
   height: 18px;
   margin-left: 8px;
 }
 
-.date-priority-task-form label .circle1 {
+.date-priority-task-form button .circle1 {
   color: #38e635;
 }
 
-.date-priority-task-form label .circle2 {
+.date-priority-task-form button .circle2 {
   color: #f6a811;
 }
 
-.date-priority-task-form label .circle3 {
+.date-priority-task-form button .circle3 {
   color: #f52f52;
 }
 
@@ -150,24 +201,23 @@
 .list-task-form > div:nth-child(2) {
   border: 1px solid black;
   border-radius: 10px;
-  height: 205px;
+  height: 190px;
+  padding-top: 9px;
+  padding-bottom: 9px;
 }
 
-.list-task-form ul {
-  list-style: none;
-  padding: 0;
-}
-
-.list-task-form li {
-  margin-bottom: 15px;
-  padding-left: 15px;
-}
-
-.list-task-form li * {
+.list-task-form button {
+  all: unset;
   display: flex;
+  width: 100%;
   align-items: center;
-  color: black;
-  text-decoration: none;
+  padding: 9px 15px;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.list-task-form button.selected {
+  box-shadow: inset 0px 0px 8px 2px rgba(0, 0, 0, 0.3);
 }
 
 .list-task-form .square {
@@ -199,24 +249,23 @@
 .group-task-form div:nth-child(2) {
   border: 1px solid black;
   border-radius: 10px;
-  height: 205px;
+  height: 190px;
+  padding-top: 9px;
+  padding-bottom: 9px;
 }
 
-.group-task-form ul {
-  list-style: none;
-  padding: 0px;
-}
-
-.group-task-form li {
-  margin-bottom: 15px;
-  padding-left: 15px;
-}
-
-.group-task-form li * {
+.group-task-form button {
+  all: unset;
   display: flex;
+  width: 100%;
   align-items: center;
-  color: black;
-  text-decoration: none;
+  padding: 9px 15px;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.group-task-form button.selected {
+  box-shadow: inset 0px 0px 8px 2px rgba(0, 0, 0, 0.3);
 }
 
 .group-task-form svg,

@@ -1,8 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import logo from "../assets/images/logo-slogan.png";
 import DropList from "./DropList";
-import { DropListProvider } from './DropListContext';
 import "../assets/style/SideBar.css";
 import { FaRegAddressBook, FaRegCalendarCheck, FaRegCalendarTimes, FaRegCheckCircle, FaRegUserCircle, FaSignInAlt } from 'react-icons/fa';
 import { HiUserGroup } from "react-icons/hi";
@@ -45,13 +44,13 @@ function SideBar() {
 
 
             <div className='container-droplist'>
-                <DropList name="Groups" action="Add Group" data={dataGroups}></DropList>
-                <DropList name="Lists" action="Add List" data={dataLists}></DropList>
+                <DropList name="Groups" action="Add Group" data={dataGroups} link='/add-edit-group'></DropList>
+                <DropList name="Lists" action="Add List" data={dataLists} ></DropList>
             </div>
 
 
             <ul className='footer-sidebar'>
-                <li><NavLink className='link-nav-bar' to="/account" acti><FaRegUserCircle />Account</NavLink></li>
+                <li><NavLink className='link-nav-bar' to="/account"><FaRegUserCircle />Account</NavLink></li>
                 <li><NavLink className='link-nav-bar' to="/login"><FaSignInAlt />Sign out</NavLink></li>
 
             </ul>

@@ -51,10 +51,16 @@
 .filter-tasks button {
   all: unset;
   padding: 0.5% 1%;
-  border: 1px solid black;
+  border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 10px;
   margin-right: 7px;
   cursor: pointer;
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.filter-tasks button.active {
+  border: 1px solid rgba(0, 0, 0);
+  color: rgba(0, 0, 0);
 }
 
 /* Tasks -------------------- */
@@ -138,10 +144,13 @@
   color: rgba(0, 0, 0, 0.3);
 }
 
+/* Task Actions -------------------------------- */
+
 .task-actions {
   display: flex;
   align-items: center;
 }
+
 .delete-task {
   display: flex;
   justify-content: center;
@@ -198,6 +207,45 @@
 .done-task:hover,
 .delete-task:hover {
   cursor: pointer;
+}
+
+.message-box-done {
+  visibility: hidden;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px 50px;
+  background-color: rgba(0, 0, 0, 0.7);
+  box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  border-radius: 10px;
+  text-align: center;
+  z-index: 9999;
+}
+
+.message-box-done button {
+  width: 100px;
+  height: 50px;
+  border-radius: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 5px;
+  margin-bottom: 12px;
+  font-size: 16px;
+  text-decoration: none;
+  border: none;
+  box-shadow: 4px 4px 9px rgba(0, 0, 0, 0.25);
+  color: white;
+  cursor: pointer;
+}
+
+.message-box-done button:nth-child(1) {
+  background-color: #d42745;
+}
+
+.message-box-done button:nth-child(2) {
+  background-color: #04c300;
 }
 
 .all-tasks > p {
