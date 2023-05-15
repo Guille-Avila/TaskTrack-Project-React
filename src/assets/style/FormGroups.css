@@ -11,7 +11,7 @@
   margin-bottom: 7px;
 }
 
-.list-members-container div:nth-child(1) h3 {
+.list-members-container-title {
   margin: 0;
   margin-left: 10px;
 }
@@ -60,14 +60,17 @@
 .members-container button {
   width: 80px;
   padding: 4px 10px;
-  background-color: #e6d435;
   margin: 0;
   margin-left: 10px;
-  border-radius: 10px; 
-  border: none;
+  border-radius: 10px;
+  border: none;cursor: pointer;
 }
 
-.members-container button:nth-child(2) {
+.members-container-edit-button {
+  background-color: #e6d435;
+}
+
+.members-container-delete-button {
   background-color: #d42745;
   color: white;
 }

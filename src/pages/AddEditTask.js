@@ -4,6 +4,7 @@ import SideBar from "../components/SideBar"
 import { HiUserGroup } from "react-icons/hi";
 import { BsFillCircleFill, BsFillTrash3Fill } from 'react-icons/bs';
 import { IoIosAddCircleOutline } from 'react-icons/io';
+import ListForm from '../components/ListForm';
 
 import "../assets/style/Forms.css";
 import "../assets/style/FormAddEditTask.css";
@@ -18,6 +19,7 @@ function AddEditTask() {
     const [choosePriority, setChoosePriority] = useState("");
     const [chooseList, setChooseList] = useState(null);
     const [chooseGroup, setChooseGroup] = useState(null);
+    const [showListForm, setShowListForm] = useState(false);
 
     const handleButtonClick = () => {
         setShowMessage(!showMessage);
@@ -34,6 +36,11 @@ function AddEditTask() {
     const handleGroupClick = (group) => {
         setChooseGroup(group);
     };
+
+    const handleListForm = () => {
+        setShowListForm(!showListForm);
+    };
+
 
     return (
         <div className='container-sidebar-interface'>
@@ -97,11 +104,13 @@ function AddEditTask() {
 
                         <div className='list-task-form'>
                             <div>
-                                <h3>List</h3>
-                                <Link className='dropdown-sidebar-links-link'>
+                                <h3 className='list-task-form-title'>List</h3>
+                                <Link className='dropdown-sidebar-links-link'
+                                    onClick={handleListForm}>
                                     {action.lists}&nbsp;
                                     <IoIosAddCircleOutline />
                                 </Link>
+                                <ListForm show={showListForm} handleButtonClick={handleListForm} />
                             </div>
                             <div>
 

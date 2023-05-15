@@ -8,11 +8,7 @@ const HeaderTasks = ({ title }) => {
   const [showListForm, setShowListForm] = useState(false);
   const currentUrl = window.location.pathname;
   const navigate = useNavigate();
-
-  const handleListForm = () => {
-    setShowListForm(!showListForm);
-  };
-
+ 
   let buttonText = "";
   let destination = "";
   let page = '';
@@ -22,7 +18,6 @@ const HeaderTasks = ({ title }) => {
     destination = "/add-edit-group";
   } else if (currentUrl.startsWith('/list')) {
     buttonText = "Edit List";
-    // destination = "/add-edit-list";
     page = 'list'
   }
 
@@ -44,7 +39,11 @@ const HeaderTasks = ({ title }) => {
               {buttonText}
             </button>
 
-            <ListForm show={showListForm} handleButtonClick={handleListForm} title={title} page={page}></ListForm >
+            <ListForm
+              show={showListForm}
+              handleButtonClick={handleClick}
+              title={title}
+              page={page} />
 
           </div>
         }

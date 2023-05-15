@@ -4,16 +4,13 @@ import { BsFillTrash3Fill } from 'react-icons/bs';
 
 const ListForm = ({ show, handleButtonClick, title, page }) => {
 
-    // const currentUrl = window.location.pathname;
-
     return (
 
         <div className='box-form-list'
             // key={index}
-            style={show ? { visibility: 'visible' } : { visibility: 'hidden' }}
-        >
+            style={show ? { visibility: 'visible' } : { visibility: 'hidden' }}>
             <h3>List Name</h3>
-            <input type='text' placeholder='Enter a list name' value={title}></input>
+            <input type='text' placeholder='Enter a list name' defaultValue={title}></input>
             {/* <p>{task.name}</p> */}
             {page === 'list' &&
 
