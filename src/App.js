@@ -28,8 +28,8 @@ function App() {
           <Route path="/due-tasks" element={<DueTasks />} />
           <Route path="/done" element={<Done />} />
           <Route path="/account" element={<Account />} />
-          <Route path="/add-edit-task" element={<AddEditTask />} />
-          <Route path="/add-edit-group" element={<AddEditGroup />} />
+          <Route path="/add-edit-task/:id?" element={<AddEditTask />} />
+          <Route path="/add-edit-group/:id?" element={<AddEditGroup />} />
           <Route path="/group/:id" element={<Group />} />
           <Route path="/list/:id" element={<List />} />
         </Routes>

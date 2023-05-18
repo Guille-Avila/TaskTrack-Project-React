@@ -111,7 +111,7 @@
   max-height: 130px;
   padding: 10px 0px;
   width: 100%;
-  overflow: hidden;
+  overflow: auto;
   padding-bottom: 12px;
 }
 

@@ -1,34 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import SideBar from "../components/SideBar"
 import InterfaceTasks from '../components/InterfaceTasks';
 import "../assets/style/Home.css";
+import { fetchTasks } from '../services/apiTasks';
 
 const title = "Due Tasks!"
-
 const buttons = ['Priority', 'Creation Date'];
-
-const tasks = [
-    {
-        name: 'Due Task No. 1',
-        description: 'description of the task number 1',
-        dueDate: '05/05/2023'
-    },
-    {
-        name: 'Due Task No. 2',
-        description: 'description of the task number 2',
-        dueDate: '06/05/2023'
-    },
-    {
-        name: 'Due Task No. 3',
-        description: 'description of the task number 3',
-        dueDate: '07/05/2023'
-    }
-];
-
 const taskMessage = "These are all your due tasks!"
 
-
 function DueTasks() {
+
+    const [tasks, setTasks] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const tasksData = await fetchTasks();
+                setTasks(tasksData);
+            } catch (error) {
+                console.error('Error al obtener las tareas:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
 
     return (
         <div className='container-sidebar-interface'>

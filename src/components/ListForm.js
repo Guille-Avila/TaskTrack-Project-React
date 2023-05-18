@@ -13,9 +13,7 @@ const ListForm = ({ show, handleButtonClick, title, page }) => {
             <input type='text' placeholder='Enter a list name' defaultValue={title}></input>
             {/* <p>{task.name}</p> */}
             {page === 'list' &&
-
                 <button className='delete' type="button" onClick={handleButtonClick}><BsFillTrash3Fill /><p>Delete</p></button>
-
             }
             <div>
                 <button type="button" onClick={handleButtonClick}>Cancel</button>

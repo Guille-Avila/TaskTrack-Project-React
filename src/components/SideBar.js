@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import logo from "../assets/images/logo-slogan.png";
 import DropList from "./DropList";
 import "../assets/style/SideBar.css";
 import { FaRegAddressBook, FaRegCalendarCheck, FaRegCalendarTimes, FaRegCheckCircle, FaRegUserCircle, FaSignInAlt } from 'react-icons/fa';
 import { HiUserGroup } from "react-icons/hi";
+import { DropListContext } from './DropListContext';
 
 const navLinks = [
     { to: '/home', icon: <FaRegAddressBook />, text: 'All Tasks' },
@@ -13,18 +14,34 @@ const navLinks = [
     { to: '/done', icon: <FaRegCheckCircle />, text: 'Done' },
 ];
 
-const dataGroups = <ul>
-    <li><NavLink to="/group/1" className='link-drop-list'><HiUserGroup />Group 1</NavLink></li>
-    <li><NavLink to="/group/2" className='link-drop-list'><HiUserGroup />Group 2</NavLink></li>
-</ul>;
-
-const dataLists = <ul>
-    <li><NavLink to="/list/1" className='link-drop-list'><div className="square" />List 1</NavLink></li>
-    <li><NavLink to="/list/2" className='link-drop-list'><div className="square" />List 2</NavLink></li>
-</ul>;
-
-
 function SideBar() {
+
+    const { groups, lists } = useContext(DropListContext);
+
+    const dataGroups = <ul>
+        {groups.map((group, index) => (
+            <li key={index}>
+                <NavLink
+                    className='link-drop-list'
+                    to={`/group/${group.id}/`}>
+                    <HiUserGroup />
+                    {group.name}
+                </NavLink>
+            </li>))}
+    </ul>;
+
+    const dataLists = <ul>
+        {lists.map((list, index) => (
+            <li key={index}>
+                <NavLink
+                    to={`/group/${list.id}/`}
+                    className='link-drop-list'>
+                    <div className="square" />
+                    {list.name}
+                </NavLink>
+            </li>))}
+    </ul>;
+
     return (
         <div className="container-side-bar">
             <div className="logo-slogan-side-bar">
@@ -32,8 +49,8 @@ function SideBar() {
             </div>
 
             <ul className='nav-bar'>
-                {navLinks.map(link => (
-                    <li key={link.to}>
+                {navLinks.map((link, index) => (
+                    <li key={index}>
                         <NavLink className='link-nav-bar' to={link.to}>
                             {link.icon}
                             {link.text}

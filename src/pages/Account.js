@@ -7,6 +7,8 @@ import "../assets/style/FormAccount.css";
 function Account() {
 
     const navigate = useNavigate();
+    const [showChangePassword, setShowChangePassword] = useState(false);
+    const [showDeleteAccount, setShowDeleteAccount] = useState(false);
 
     const [formData, setFormData] = useState({
         username: '',
@@ -16,9 +18,6 @@ function Account() {
         company: '',
         college: '',
     });
-
-    const [showChangePassword, setShowChangePassword] = useState(false);
-    const [showDeleteAccount, setShowDeleteAccount] = useState(false);
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;

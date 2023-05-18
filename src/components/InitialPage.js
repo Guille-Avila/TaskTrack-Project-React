@@ -6,10 +6,11 @@ import "../assets/style/login.css";
 
 function InitialPage(props) {
 
-    const { header: { message, button, headerLinkPath }, form: { greeting, inputs, formButton, link, linkFormPath, handleClick } } = props
+    const { header: { message, button, headerLinkPath }, form: { greeting, inputs, formButton, link, linkFormPath, handleSubmit } } = props
+
 
     const inputsComponent = inputs.map((input) =>
-        <InputInitialPages key={input.id} name={input.name} placeholder={input.placeholder} />);
+        <InputInitialPages key={input.id} type={input.type} value={input.value} placeholder={input.placeholder} onChange={input.onChange} />);
 
     return (
         <div className="container">
@@ -26,10 +27,10 @@ function InitialPage(props) {
 
             <div className="center-container-form">
                 <div className="container-form">
-                    <form className="form">
+                    <form className="form" onSubmit={handleSubmit}>
                         <p>{greeting}</p>
                         {inputsComponent}
-                        <button type="submit" onClick={handleClick}>
+                        <button type="submit">
                             {formButton}
                         </button>
                         <Link className="link-form" to={linkFormPath}>
