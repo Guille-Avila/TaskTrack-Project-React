@@ -14,26 +14,34 @@ import Group from "./pages/Group";
 import List from "./pages/List";
 import { DropListProvider } from './components/DropListContext';
 
+function AppWithContext() {
+  return (
+    <DropListProvider>
+      <Routes>
+        <Route path="/home" element={<Home />} />
+        <Route path="/today" element={<Today />} />
+        <Route path="/due-tasks" element={<DueTasks />} />
+        <Route path="/done" element={<Done />} />
+        <Route path="/account" element={<Account />} />
+        <Route path="/add-edit-task/:id?" element={<AddEditTask />} />
+        <Route path="/add-edit-group/:id?" element={<AddEditGroup />} />
+        <Route path="/group/:id" element={<Group />} />
+        <Route path="/list/:id" element={<List />} />
+      </Routes>
+    </DropListProvider>
+  );
+}
+
 function App() {
   return (
     <BrowserRouter>
-      <DropListProvider>
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/recover-password" element={<RecoverPassword />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/today" element={<Today />} />
-          <Route path="/due-tasks" element={<DueTasks />} />
-          <Route path="/done" element={<Done />} />
-          <Route path="/account" element={<Account />} />
-          <Route path="/add-edit-task/:id?" element={<AddEditTask />} />
-          <Route path="/add-edit-group/:id?" element={<AddEditGroup />} />
-          <Route path="/group/:id" element={<Group />} />
-          <Route path="/list/:id" element={<List />} />
-        </Routes>
-      </DropListProvider>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/recover-password" element={<RecoverPassword />} />
+        <Route path="/*" element={<AppWithContext />} />
+      </Routes>
     </BrowserRouter>
   );
 }
