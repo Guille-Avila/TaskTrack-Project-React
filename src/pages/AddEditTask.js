@@ -19,6 +19,7 @@ function AddEditTask() {
     const { id } = useParams();
     const [task, setTask] = useState(null);
 
+
     useEffect(() => {
         const fetchTask = async () => {
             if (id) {
@@ -30,7 +31,6 @@ function AddEditTask() {
                         },
                     });
                     setTask(response.data);
-                    console.log(response.data);
                 } catch (error) {
                     console.error('Error al obtener las tareas:', error);
                 }
@@ -88,8 +88,8 @@ function AddEditTask() {
             setDescription(task.description);
             setDueDate(task.due_date);
             setPriority(task.priority);
-            setGroup(task.list);
-            setList(task.group);
+            setGroup(task.group);
+            setList(task.list);
         }
     }, [task]);
 
@@ -99,8 +99,8 @@ function AddEditTask() {
             const token = localStorage.getItem('token');
             const response = await axios.put(`http://localhost:8000/api/tasks/${id}/`, {
                 title: title,
-                description: description,
-                due_date: dueDate,
+                description: description === "" ? null : description,
+                due_date: dueDate === "" ? null : dueDate,
                 priority: priority,
                 group: group,
                 list: list,
@@ -121,13 +121,14 @@ function AddEditTask() {
 
     const createTask = async (event) => {
         event.preventDefault();
+
         try {
             const token = localStorage.getItem('token');
             const response = await axios.post(`http://localhost:8000/api/tasks/`, {
                 title: title,
-                description: description,
-                due_date: dueDate,
-                priority: priority,
+                description: description === "" ? null : description,
+                due_date: dueDate === "" ? null : dueDate,
+                priority: priority ? priority : 1,
                 group: group,
                 list: list,
             }, {
@@ -159,7 +160,7 @@ function AddEditTask() {
             response.status === 204 && navigate(-1);
 
         } catch (error) {
-            console.error('Error Create Task:', error);
+            console.error('Error Delete Task:', error);
         }
     }
 

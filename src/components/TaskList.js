@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { BsFillCircleFill, BsFillTrash3Fill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
-const TaskList = ({ tasks, taskMessage }) => {
+const TaskList = ({ tasks, taskMessage, fetchChanges }) => {
 
     const currentUrl = window.location.pathname;
-
     const [indexMessage, setIndexMessage] = useState(null);
 
     const handleButtonClick = (index) => {
@@ -30,7 +30,58 @@ const TaskList = ({ tasks, taskMessage }) => {
         return circleColor
     }
 
+    const doneTask = async (task) => {
+        // event.preventDefault();
+        console.log(task);
+        try {
+            const date = new Date();
+            const token = localStorage.getItem('token');
+            const response = await axios.put(`http://localhost:8000/api/tasks/${task.id}/`, {
+                title: task.title,
+                done: true,
+                done_date: date.toISOString()
+            }, {
+                headers: {
+                    Authorization: `Token ${token}`,
+                },
+            });
 
+            // Process API response
+            console.log(response.status)
+            fetchChanges();
+            response.status === 200 && handleButtonClick();
+        } catch (error) {
+            console.error('Error Done Task:', error);
+        }
+    }
+
+    const deleteTask = async (task) => {
+        // event.preventDefault();
+        console.log(task);
+        try {
+            const token = localStorage.getItem('token');
+            const response = await axios.delete(`http://localhost:8000/api/tasks/${task.id}/`, {
+                headers: {
+                    Authorization: `Token ${token}`,
+                },
+            });
+
+            // Process API response
+            console.log(response.status)
+            fetchChanges();
+            response.status === 204 && handleButtonClick();
+        } catch (error) {
+            console.error('Error Done Task:', error);
+        }
+    }
+
+    const firstLetterUppercase = (text) => {
+        return text.length > 20 ?
+            text.charAt(0).toUpperCase() +
+            text.slice(1, 20) + '...' :
+            text.charAt(0).toUpperCase() +
+            text.slice(1)
+    }
 
     return (
         <div className='all-tasks'>
@@ -39,19 +90,19 @@ const TaskList = ({ tasks, taskMessage }) => {
                     <div className='info-task'>
                         <div className='list-color'></div>
                         <div className='name-description-task'>
-                            <h2>{task.title.length > 20 ?
-                                task.title.charAt(0).toUpperCase() +
-                                task.title.slice(1, 20) + '...' :
-                                task.title.charAt(0).toUpperCase() +
-                                task.title.slice(1)}</h2>
-                            <p>{task.description.length > 30 ? task.description.slice(0, 30) + '...' : task.description}</p>
+                            <h2>{firstLetterUppercase(task.title)}</h2>
+                            {!task.description ?
+                                <p>No description</p> :
+                                <p>{task.description.length > 30 ?
+                                    task.description.slice(0, 30) + '...' :
+                                    task.description}</p>}
                         </div>
                         <div className='details-tasks'>
                             <div className='priority'>
                                 <p>Priority &nbsp; </p>
                                 <BsFillCircleFill className='circle' style={{ color: setPriorityColor(task.priority) }} />
                             </div>
-                            <p><i>Due Date</i> &nbsp; {new Date(task.due_date).toLocaleDateString('es-ES')}</p>
+                            <p><i>Due Date</i> &nbsp; {task.due_date ? new Date(task.due_date).toLocaleDateString('es-ES') : 'No date'}</p>
                         </div>
                     </div>
 
@@ -69,7 +120,7 @@ const TaskList = ({ tasks, taskMessage }) => {
                                     <p>{task.name}</p>
                                     <div>
                                         <button onClick={handleButtonClick}>No</button>
-                                        <button onClick={handleButtonClick}>Yes</button>
+                                        <button onClick={() => deleteTask(task)}>Yes</button>
                                     </div>
                                 </div>
 
@@ -82,10 +133,11 @@ const TaskList = ({ tasks, taskMessage }) => {
                                     key={index}
                                     style={indexMessage === index ? { visibility: 'visible' } : { visibility: 'hidden' }}>
                                     <p>Have you finished this task?</p>
-                                    <p>{task.name}</p>
+                                    <p>"{firstLetterUppercase(task.title)}"</p>
                                     <div>
                                         <button onClick={handleButtonClick}>No</button>
-                                        <button onClick={handleButtonClick}>Yes</button>
+                                        <button onClick={() => doneTask(task)}>Yes</button>
+
                                     </div>
                                 </div>
 

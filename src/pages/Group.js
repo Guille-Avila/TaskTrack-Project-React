@@ -1,37 +1,47 @@
-import React from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import SideBar from "../components/SideBar"
 import InterfaceTasks from '../components/InterfaceTasks';
 import "../assets/style/Home.css";
+import { fetchTasks } from '../services/apiTasks';
+import { useParams } from 'react-router-dom';
+import { DropListContext } from '../components/DropListContext';
 
-const title = "Name Group";
+// const title = "Name Group";
 const buttons = ['Priority', 'Creation Date', 'Due Date'];
-const tasks = [
-    {
-        name: 'Group Task No. 1',
-        description: 'description of the task number 1',
-        dueDate: '05/05/2023'
-    },
-    {
-        name: 'Group Task No. 2',
-        description: 'description of the task number 2',
-        dueDate: '06/05/2023'
-    },
-    {
-        name: 'Group Task No. 3',
-        description: 'description of the task number 3',
-        dueDate: '07/05/2023'
-    }
-];
-
 const taskMessage = "These are all the tasks in this group!"
 
 
 function Group() {
 
+    const { id } = useParams();
+    const [tasks, setTasks] = useState([]);
+    const { groups } = useContext(DropListContext);
+
+    const title = groups.find((group) => group.id === parseInt(id))?.name;
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const tasksData = await fetchTasks();
+                const filterByGroup = (list) => {
+                    return list.filter((obj) => obj.group === parseInt(id)
+                    );
+                };
+                const tasksByGroup = filterByGroup(tasksData);
+                setTasks(tasksByGroup);
+            } catch (error) {
+                console.error('Error al obtener las tareas:', error);
+            }
+        };
+
+        fetchData();
+    }, [id]);
+
+
     return (
         <div className='container-sidebar-interface'>
             <SideBar />
-            <InterfaceTasks title={title} buttons={buttons} tasks={tasks} taskMessage={taskMessage}/>
+            <InterfaceTasks title={title} buttons={buttons} tasks={tasks} taskMessage={taskMessage} />
         </div>
     );
 }

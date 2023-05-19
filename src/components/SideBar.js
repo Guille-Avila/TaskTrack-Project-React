@@ -34,7 +34,7 @@ function SideBar() {
         {lists.map((list, index) => (
             <li key={index}>
                 <NavLink
-                    to={`/group/${list.id}/`}
+                    to={`/list/${list.id}/`}
                     className='link-drop-list'>
                     <div className="square" />
                     {list.name}
