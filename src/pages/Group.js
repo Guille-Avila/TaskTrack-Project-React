@@ -43,7 +43,7 @@ function Group() {
         } catch (error) {
             console.error('Error al obtener las tareas:', error);
         } finally {
-            setIsFetching(false); // Indicar que la solicitud ha finalizado
+            setIsFetching(false);
         }
         console.log(id);
         console.log(tasks);
@@ -58,25 +58,23 @@ function Group() {
         // eslint-disable-next-line 
     }, [id]);
 
-    // if (isFetching) {
-    //     return <div>Cargando...</div>; // Mostrar un indicador de carga mientras se obtienen los datos
-    // }
-
     return (
         <div className='container-sidebar-interface'>
             <SideBar />
             {isFetching ? (
-                <div
-                    style={{
-                        position: 'fixed',
-                        top: '50%',
-                        left: '50%',
-                        transform: 'translate(-50%, -50%)',
-                        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                        padding: '10px 20px',
-                        color: '#fff',
-                        borderRadius: '10px'
-                    }}>Loading...</div>
+                <div style={{
+                    width: '100%',
+                    display: 'flex',
+                    alignItems: "center",
+                    justifyContent: "center",
+                }}>
+                    <div
+                        style={{
+                            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                            padding: '10px 20px',
+                            color: '#fff',
+                            borderRadius: '10px'
+                        }}>Loading...</div></div>
             ) : (
                 <InterfaceTasks
                     title={title}
