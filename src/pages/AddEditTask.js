@@ -85,7 +85,7 @@ function AddEditTask() {
     useEffect(() => {
         if (task) {
             setTitle(task.title);
-            setDescription(task.description);
+            setDescription(!task.description ? '' : task.description);
             setDueDate(task.due_date);
             setPriority(task.priority);
             setGroup(task.group);

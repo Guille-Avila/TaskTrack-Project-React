@@ -11,16 +11,26 @@ const taskMessage = "These are all your pending tasks!"
 function Home() {
 
     const [tasks, setTasks] = useState([]);
-    const [changeTasks, setChangeTasks] = useState([])
+    const [changeTasks, setChangeTasks] = useState([]);
+
+    const filterDue = (list) => {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        return list.filter((obj) => {
+            const dueDate = new Date(obj.due_date);
+            dueDate.setHours(+24, 0, 0, 0);
+            return dueDate >= today || !obj.due_date;
+        });
+    };
 
     const fetchChanges = () => {
-
         const fetchData = async () => {
             try {
                 const tasksData = await fetchTasks();
-                setTasks(tasksData);
+                const tasksDue = filterDue(tasksData);
+                setTasks(tasksDue);
                 if (tasks.length !== changeTasks.length) { 
-                    setChangeTasks(tasksData)
+                    setChangeTasks(tasksDue)
                 }
             } catch (error) {
                 console.error('Error al obtener las tareas:', error);
@@ -34,8 +44,9 @@ function Home() {
         const fetchData = async () => {
             try {
                 const tasksData = await fetchTasks();
-                setTasks(tasksData);
-                setChangeTasks(tasksData);
+                const tasksDue = filterDue(tasksData);
+                setTasks(tasksDue);
+                setChangeTasks(tasksDue);
             } catch (error) {
                 console.error('Error al obtener las tareas:', error);
             }

@@ -83,6 +83,15 @@ const TaskList = ({ tasks, taskMessage, fetchChanges }) => {
             text.slice(1)
     }
 
+    function setDate(date) {
+        const dueDate = new Date(date.due_date);
+        const dueDay = dueDate.getUTCDate();
+        const dueMonth = dueDate.getUTCMonth() + 1;
+        const dueYear = dueDate.getUTCFullYear();
+
+        return `${dueDay}/${dueMonth}/${dueYear}`;
+    }
+
     return (
         <div className='all-tasks'>
             {tasks.map((task, index) => (
@@ -102,7 +111,7 @@ const TaskList = ({ tasks, taskMessage, fetchChanges }) => {
                                 <p>Priority &nbsp; </p>
                                 <BsFillCircleFill className='circle' style={{ color: setPriorityColor(task.priority) }} />
                             </div>
-                            <p><i>Due Date</i> &nbsp; {task.due_date ? new Date(task.due_date).toLocaleDateString('es-ES') : 'No date'}</p>
+                            <p><i>Due Date</i> &nbsp; {task.due_date ? setDate(task) : 'No date'}</p>
                         </div>
                     </div>
 
