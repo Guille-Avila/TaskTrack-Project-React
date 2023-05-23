@@ -2,20 +2,21 @@ import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { FaSearch, FaEdit } from 'react-icons/fa';
 import ListForm from './ListForm';
+import { useParams } from 'react-router-dom';
 
 const HeaderTasks = ({ title }) => {
-
+  const { id } = useParams();
   const [showListForm, setShowListForm] = useState(false);
   const currentUrl = window.location.pathname;
   const navigate = useNavigate();
- 
+
   let buttonText = "";
   let destination = "";
   let page = '';
 
   if (currentUrl.startsWith('/group')) {
     buttonText = "Edit Group";
-    destination = "/add-edit-group";
+    destination = `/add-edit-group/${id}`;
   } else if (currentUrl.startsWith('/list')) {
     buttonText = "Edit List";
     page = 'list'

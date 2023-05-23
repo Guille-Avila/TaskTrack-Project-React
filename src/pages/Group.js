@@ -75,6 +75,7 @@ function Group() {
                             color: '#fff',
                             borderRadius: '10px'
                         }}>Loading...</div></div>
+                        
             ) : (
                 <InterfaceTasks
                     title={title}
