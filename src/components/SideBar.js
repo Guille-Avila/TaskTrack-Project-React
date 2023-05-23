@@ -61,7 +61,7 @@ function SideBar() {
 
 
             <div className='container-droplist'>
-                <DropList name="Groups" action="Add Group" data={dataGroups} link='/add-edit-group'></DropList>
+                <DropList name="Groups" action="Add Group" data={dataGroups}></DropList>
                 <DropList name="Lists" action="Add List" data={dataLists} ></DropList>
             </div>
 

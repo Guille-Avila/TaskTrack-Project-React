@@ -120,7 +120,7 @@ function AddEditGroup() {
                             {id && <button type="button" onClick={handleDeleteGroup}><BsFillTrash3Fill />Delete Group</button>}
                         </div>
 
-                        {id && <div className='message-box-delete'
+                        <div className='message-box-delete'
                             style={showMessage ? { visibility: 'visible' } : { visibility: 'hidden' }}>
                             <p>Do you want to delete this Group?</p>
                             <p>{group?.name}</p>
@@ -128,7 +128,7 @@ function AddEditGroup() {
                                 <button type="button" onClick={handleDeleteGroup}>No</button>
                                 <button type="button" onClick={deleteGroup}>Yes</button>
                             </div>
-                        </div>}
+                        </div>
 
                         <div className='title-task-form'>
                             <h3>Group name</h3>
@@ -211,7 +211,7 @@ function AddEditGroup() {
 
                     <div className='cancel-update' style={{ width: '102%' }}>
                         <button type="button" onClick={() => navigate(-1)}>Cancel</button>
-                        <button type="button" onClick={() => navigate(-1)}>{id ? 'Update' : 'Save'}</button>
+                        <button type="button" onClick={() => navigate(-1)}>{id ? 'Update' : 'Create'}</button>
                     </div>
 
                 </form>
