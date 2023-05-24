@@ -22,7 +22,7 @@ function AddEditTask() {
 
     useEffect(() => {
         const fetchTask = async () => {
-            
+
             if (id) {
                 try {
                     const token = localStorage.getItem('token');
@@ -275,7 +275,7 @@ function AddEditTask() {
                                     <IoIosAddCircleOutline />
                                 </Link>
                             </div>
-                            <div>
+                            <div style={{ overflow: 'auto' }}>
 
                                 {groups.map((groupmap, index) => (
                                     <button

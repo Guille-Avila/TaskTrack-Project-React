@@ -12,41 +12,46 @@ export const DropListProvider = ({ children }) => {
   const [groups, setGroups] = useState([]);
   const [lists, setLists] = useState([]);
 
+  const fetchGroups = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.get('http://localhost:8000/api/groups/', {
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+      });
+      setGroups(response.data);
+    } catch (error) {
+      console.error('Error al obtener los grupos:', error);
+    }
+  };
+
+  const fetchLists = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.get('http://localhost:8000/api/lists/', {
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+      });
+      setLists(response.data);
+    } catch (error) {
+      console.error('Error al obtener las listas:', error);
+    }
+  };
+
+  const setGroupsLists = () => {
+    fetchGroups();
+    fetchLists();
+  }
+
   useEffect(() => {
-    const fetchGroups = async () => {
-      try {
-        const token = localStorage.getItem('token');
-        const response = await axios.get('http://localhost:8000/api/groups/', {
-          headers: {
-            Authorization: `Token ${token}`,
-          },
-        });
-        setGroups(response.data);
-      } catch (error) {
-        console.error('Error al obtener los grupos:', error);
-      }
-    };
-
-    const fetchLists = async () => {
-      try {
-        const token = localStorage.getItem('token');
-        const response = await axios.get('http://localhost:8000/api/lists/', {
-          headers: {
-            Authorization: `Token ${token}`,
-          },
-        });
-        setLists(response.data);
-      } catch (error) {
-        console.error('Error al obtener las listas:', error);
-      }
-    };
-
     fetchGroups();
     fetchLists();
   }, []);
 
   return (
-    <DropListContext.Provider value={{ isOpen, setIsOpen, groups, lists }}>
+    <DropListContext.Provider value={{ isOpen, setIsOpen, groups, lists, setGroupsLists }}>
       {children}
     </DropListContext.Provider>
   );

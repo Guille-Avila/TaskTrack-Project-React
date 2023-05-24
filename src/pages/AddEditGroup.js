@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import SideBar from "../components/SideBar"
 import { BsFillTrash3Fill } from 'react-icons/bs';
@@ -7,6 +7,7 @@ import { FaRegUserCircle } from 'react-icons/fa';
 import MemberForm from '../components/MemberForm';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { DropListContext } from '../components/DropListContext';
 
 import "../assets/style/Forms.css";
 import "../assets/style/FormAddEditTask.css";
@@ -23,9 +24,10 @@ function AddEditGroup() {
     const [members, setMembers] = useState([]);
     const [group, setGroup] = useState(null);
     const [groupTitle, setGroupTitle] = useState("");
-    const [email, setEmail] = useState('');
+    const [email, setEmail] = useState([]);
     const [currentUser, setCurrentUser] = useState(null);
     const [idGroup, setIdGroup] = useState(null);
+    const { setGroupsLists } = useContext(DropListContext);
 
     const getCurrentUser = async () => {
         try {
@@ -43,10 +45,12 @@ function AddEditGroup() {
         }
     };
 
-    const handleEmailChange = (event) => {
-        setEmail(event.target.value);
+    const handleEmailChange = (event, index) => {
+        const updatedEmails = [...email];
+        updatedEmails[index] = event.target.value;
+        console.log(email);
+        setEmail(updatedEmails);
     };
-
 
     useEffect(() => {
         const fetchMembers = async () => {
@@ -60,6 +64,7 @@ function AddEditGroup() {
                         },
                     });
                     setMembers(response.data);
+
                 } catch (error) {
                     console.error('Error al obtener las tareas:', error);
                 }
@@ -85,6 +90,20 @@ function AddEditGroup() {
                 } catch (error) {
                     console.error('Error al obtener las tareas:', error);
                 }
+
+                try {
+                    const token = localStorage.getItem('token');
+                    const response = await axios.get(`http://localhost:8000/api/members/${id}/`, {
+                        headers: {
+                            Authorization: `Token ${token}`,
+                        },
+                    });
+                    setEmail(response.data.filter((member) => member?.email).map((member) => member?.email));
+
+                } catch (error) {
+                    console.error('Error al obtener las tareas:', error);
+                }
+
             }
         };
         fetchGroup();
@@ -142,7 +161,7 @@ function AddEditGroup() {
         }
     }
 
-    const updateMemberAPI = async (memberId) => {
+    const updateMemberAPI = async (memberId, email) => {
         try {
             const token = localStorage.getItem('token');
             console.log(id, memberId);
@@ -170,6 +189,7 @@ function AddEditGroup() {
 
     const handleIndexMember = (index) => {
         setIndexMember(index);
+        !index && setEmail(members.filter((member) => member?.email).map((member) => member?.email));
     };
 
     const handleDeleteMember = (index) => {
@@ -198,8 +218,10 @@ function AddEditGroup() {
 
             // Process API response
             console.log(response.status)
-            response.status === 200 && navigate(`/group/${id}/`);
-
+            if (response.status === 200) {
+                setGroupsLists();
+                navigate(`/group/${id}/`);
+            }
         } catch (error) {
             console.error('Error update Group Name:', error);
         }
@@ -280,11 +302,11 @@ function AddEditGroup() {
                                                             type='email'
                                                             name='email'
                                                             placeholder='Member Email'
-                                                            value={member?.email}
-                                                            onChange={handleEmailChange}></input>
+                                                            value={email[index] || ''}
+                                                            onChange={(event) => handleEmailChange(event, index)}></input>
                                                         <div>
                                                             <button type="button" onClick={handleIndexMember}>Cancel</button>
-                                                            <button type="submit" onClick={() => updateMemberAPI(member?.id)}>Save</button>
+                                                            <button type="submit" onClick={() => updateMemberAPI(member?.id, email[index])}>Save</button>
                                                         </div>
                                                     </div>}
 
