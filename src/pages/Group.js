@@ -15,8 +15,7 @@ function Group() {
     const [tasks, setTasks] = useState([]);
     const { groups } = useContext(DropListContext);
     const [isFetching, setIsFetching] = useState(false);
-
-    const title = groups.find((group) => group.id === parseInt(id))?.name;
+    const [title, setTitle] = useState("");
 
     const filterDue = (list) => {
         const today = new Date();
@@ -55,8 +54,12 @@ function Group() {
 
     useEffect(() => {
         fetchData();
+        const titleGroup = groups.find((group) => group?.id === parseInt(id))?.name;
+        setTitle(titleGroup);
         // eslint-disable-next-line 
     }, [id]);
+
+
 
     return (
         <div className='container-sidebar-interface'>
@@ -75,7 +78,7 @@ function Group() {
                             color: '#fff',
                             borderRadius: '10px'
                         }}>Loading...</div></div>
-                        
+
             ) : (
                 <InterfaceTasks
                     title={title}
