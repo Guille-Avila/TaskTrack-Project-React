@@ -11,12 +11,12 @@ const taskMessage = "These are all your pending tasks in this list!"
 
 
 function List() {
-    const { id } = useParams();
+    const { listId } = useParams();
     const [tasks, setTasks] = useState([]);
     const { lists } = useContext(DropListContext);
     const [isFetching, setIsFetching] = useState(false);
 
-    const title = lists.find((list) => list.id === parseInt(id))?.name;
+    const title = lists.find((list) => list.id === parseInt(listId))?.name;
 
     const filterDue = (list) => {
         const today = new Date();
@@ -29,7 +29,7 @@ function List() {
     };
 
     const filterByList = (list) => {
-        return list.filter((obj) => obj.list === parseInt(id)
+        return list.filter((obj) => obj.list === parseInt(listId)
         );
     };
 
@@ -45,7 +45,7 @@ function List() {
         } finally {
             setIsFetching(false);
         }
-        console.log(id);
+        console.log(listId);
         console.log(tasks);
     };
 
@@ -57,7 +57,7 @@ function List() {
     useEffect(() => {
         fetchData();
         // eslint-disable-next-line 
-    }, [id]);
+    }, [listId]);
 
 
     return (

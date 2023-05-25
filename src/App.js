@@ -26,7 +26,7 @@ function AppWithContext() {
         <Route path="/add-edit-task/:id?" element={<AddEditTask />} />
         <Route path="/add-edit-group/:id?" element={<AddEditGroup />} />
         <Route path="/group/:id" element={<Group />} />
-        <Route path="/list/:id" element={<List />} />
+        <Route path="/list/:listId" element={<List />} />
       </Routes>
     </DropListProvider>
   );
