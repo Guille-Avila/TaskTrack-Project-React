@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import "../assets/style/FormList.css";
 
-const MemberForm = ({ show, handleButtonClick, id }) => {
+const MemberForm = ({ show, handleButtonClick, id, fetchMembers }) => {
 
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
@@ -37,6 +37,7 @@ const MemberForm = ({ show, handleButtonClick, id }) => {
 
             // Process API response
             if (response.status === 201) {
+                fetchMembers();
                 handleButtonClick();
             }
 

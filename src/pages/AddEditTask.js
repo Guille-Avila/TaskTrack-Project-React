@@ -5,6 +5,7 @@ import { HiUserGroup } from "react-icons/hi";
 import { BsFillCircleFill, BsFillTrash3Fill } from 'react-icons/bs';
 import { IoIosAddCircleOutline } from 'react-icons/io';
 import ListForm from '../components/ListForm';
+import GroupForm from '../components/GroupForm';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { DropListContext } from '../components/DropListContext';
@@ -50,6 +51,7 @@ function AddEditTask() {
     const [list, setList] = useState(null);
     const [group, setGroup] = useState(null);
     const [showListForm, setShowListForm] = useState(false);
+    const [showGroupForm, setShowGroupForm] = useState(false);
 
     const BoxDelete = () => {
         setBoxDeleteTask(!boxDeleteTask);
@@ -81,6 +83,10 @@ function AddEditTask() {
 
     const handleListForm = () => {
         setShowListForm(!showListForm);
+    };
+
+    const handleGroupForm = () => {
+        setShowGroupForm(!showGroupForm);
     };
 
     useEffect(() => {
@@ -165,6 +171,8 @@ function AddEditTask() {
         }
     }
 
+    // Render component ------------------------->
+
     return (
         <div className='container-sidebar-interface'>
             <SideBar />
@@ -242,10 +250,13 @@ function AddEditTask() {
                             </div>
                         </div>
 
+                        {/* list section =============================== */}
+
                         <div className='list-task-form'>
                             <div>
                                 <h3 className='list-task-form-title'>List</h3>
-                                <Link className='dropdown-sidebar-links-link'
+                                <Link
+                                    className='dropdown-sidebar-links-link'
                                     onClick={handleListForm}>
                                     {action.lists}&nbsp;
                                     <IoIosAddCircleOutline />
@@ -267,13 +278,18 @@ function AddEditTask() {
                             </div>
                         </div>
 
+                        {/* group section ==================================== */}
+
                         <div className='group-task-form'>
                             <div>
                                 <h3>Group</h3>
-                                <Link className='dropdown-sidebar-links-link' to="/add-edit-group">
+                                <Link
+                                    className='dropdown-sidebar-links-link'
+                                    onClick={handleGroupForm}>
                                     {action.groups}&nbsp;
                                     <IoIosAddCircleOutline />
                                 </Link>
+                                <GroupForm show={showGroupForm} handleButtonClick={handleGroupForm} />
                             </div>
                             <div style={{ overflow: 'auto' }}>
 
@@ -290,6 +306,8 @@ function AddEditTask() {
                             </div>
                         </div>
                     </div>
+
+                    {/* Cancel save buttons ========================= */}
 
                     <div className='cancel-update' style={{ width: '102%' }}>
                         <button type="button" onClick={() => navigate(-1)}>Cancel</button>

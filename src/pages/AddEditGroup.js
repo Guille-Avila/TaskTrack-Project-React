@@ -26,7 +26,7 @@ function AddEditGroup() {
     const [groupTitle, setGroupTitle] = useState("");
     const [email, setEmail] = useState([]);
     const [currentUser, setCurrentUser] = useState(null);
-    const [idGroup, setIdGroup] = useState(null);
+    // const [idGroup, setIdGroup] = useState(null);
     const { setGroupsLists } = useContext(DropListContext);
 
     const getCurrentUser = async () => {
@@ -45,35 +45,26 @@ function AddEditGroup() {
         }
     };
 
-    const handleEmailChange = (event, index) => {
-        const updatedEmails = [...email];
-        updatedEmails[index] = event.target.value;
-        console.log(email);
-        setEmail(updatedEmails);
+    const fetchMembers = async () => {
+        try {
+            const token = localStorage.getItem('token');
+            const response = await axios.get(`http://localhost:8000/api/members/${id}/`, {
+                headers: {
+                    Authorization: `Token ${token}`,
+                },
+            });
+            setMembers(response.data);
+            setEmail(response.data.filter((member) => member?.email).map((member) => member?.email));
+        } catch (error) {
+            console.error('Error al obtener las tareas:', error);
+        }
     };
 
     useEffect(() => {
-        const fetchMembers = async () => {
-
-            if (id) {
-                try {
-                    const token = localStorage.getItem('token');
-                    const response = await axios.get(`http://localhost:8000/api/members/${id}/`, {
-                        headers: {
-                            Authorization: `Token ${token}`,
-                        },
-                    });
-                    setMembers(response.data);
-
-                } catch (error) {
-                    console.error('Error al obtener las tareas:', error);
-                }
-            }
-        };
-
         fetchMembers();
-
-    }, [id, members]);
+        getCurrentUser();
+        // eslint-disable-next-line
+    }, [id]);
 
     useEffect(() => {
         const fetchGroup = async () => {
@@ -90,27 +81,18 @@ function AddEditGroup() {
                 } catch (error) {
                     console.error('Error al obtener las tareas:', error);
                 }
-
-                try {
-                    const token = localStorage.getItem('token');
-                    const response = await axios.get(`http://localhost:8000/api/members/${id}/`, {
-                        headers: {
-                            Authorization: `Token ${token}`,
-                        },
-                    });
-                    setEmail(response.data.filter((member) => member?.email).map((member) => member?.email));
-
-                } catch (error) {
-                    console.error('Error al obtener las tareas:', error);
-                }
-
             }
         };
         fetchGroup();
-        getCurrentUser();
-        setIdGroup(id);
+        
         // eslint-disable-next-line
-    }, [])
+    }, [id])
+
+    const handleEmailChange = (event, index) => {
+        const updatedEmails = [...email];
+        updatedEmails[index] = event.target.value;
+        setEmail(updatedEmails);
+    };
 
     const handleGroupTitleChange = (event) => {
         setGroupTitle(event.target.value);
@@ -134,7 +116,11 @@ function AddEditGroup() {
 
             // Process API response
             console.log(response.status)
-            response.status === 204 && (window.location.href = '/home');
+
+            if (response.status === 204) {
+                setGroupsLists();
+                navigate('/home');
+            }
 
         } catch (error) {
             console.error('Error Delete Group:', error);
@@ -154,17 +140,20 @@ function AddEditGroup() {
 
             // Process API response
             console.log(response.status)
-            response.status === 204 && handleDeleteMember();
+            if (response.status === 204) {
+                handleDeleteMember();
+                fetchMembers();
+            }
 
         } catch (error) {
             console.error('Error Delete Member:', error);
         }
     }
 
-    const updateMemberAPI = async (memberId, email) => {
+    const updateMemberAPI = async (event, memberId, email) => {
+        event.preventDefault();
         try {
             const token = localStorage.getItem('token');
-            console.log(id, memberId);
             const response = await axios.put(`http://localhost:8000/api/members/${id}/${memberId}/`, {
                 email: email
             },
@@ -176,32 +165,14 @@ function AddEditGroup() {
 
             // Process API response
             console.log(response.status)
-            response.status === 200 && handleIndexMember();
+            if (response.status === 200) {
+                handleIndexMember();
+                fetchMembers();
+            }
 
         } catch (error) {
             console.error('Error Delete Member:', error);
         }
-    }
-
-    const handleMemberForm = () => {
-        setShowMemberForm(!showMemberForm);
-    };
-
-    const handleIndexMember = (index) => {
-        setIndexMember(index);
-        !index && setEmail(members.filter((member) => member?.email).map((member) => member?.email));
-    };
-
-    const handleDeleteMember = (index) => {
-        setDeleteMember(index);
-    };
-
-    const firstLetterUppercase = (text) => {
-        return text.length > 20 ?
-            text.charAt(0).toUpperCase() +
-            text.slice(1, 20) + '...' :
-            text.charAt(0).toUpperCase() +
-            text.slice(1)
     }
 
     const updateGroupName = async () => {
@@ -225,6 +196,27 @@ function AddEditGroup() {
         } catch (error) {
             console.error('Error update Group Name:', error);
         }
+    }
+
+    const handleMemberForm = () => {
+        setShowMemberForm(!showMemberForm);
+    };
+
+    const handleIndexMember = (index) => {
+        setIndexMember(index);
+        !index && setEmail(members.filter((member) => member?.email).map((member) => member?.email));
+    };
+
+    const handleDeleteMember = (index) => {
+        setDeleteMember(index);
+    };
+
+    const firstLetterUppercase = (text) => {
+        return text.length > 20 ?
+            text.charAt(0).toUpperCase() +
+            text.slice(1, 20) + '...' :
+            text.charAt(0).toUpperCase() +
+            text.slice(1)
     }
 
     return (
@@ -272,7 +264,8 @@ function AddEditGroup() {
                                 <MemberForm
                                     show={showMemberForm}
                                     handleButtonClick={handleMemberForm}
-                                    id={idGroup}
+                                    id={id}
+                                    fetchMembers={fetchMembers}
                                 />
                             </div>
 
@@ -283,7 +276,7 @@ function AddEditGroup() {
                                             <div>
                                                 <FaRegUserCircle />
                                                 {firstLetterUppercase(member.username)}
-                                                <span>{member.email}</span>
+                                                <span>{member?.email}</span>
                                             </div>
                                             <div>
                                                 {member?.id !== currentUser?.id &&
@@ -306,7 +299,7 @@ function AddEditGroup() {
                                                             onChange={(event) => handleEmailChange(event, index)}></input>
                                                         <div>
                                                             <button type="button" onClick={handleIndexMember}>Cancel</button>
-                                                            <button type="submit" onClick={() => updateMemberAPI(member?.id, email[index])}>Save</button>
+                                                            <button type="submit" onClick={(event) => updateMemberAPI(event, member?.id, email[index])}>Save</button>
                                                         </div>
                                                     </div>}
 
@@ -339,7 +332,7 @@ function AddEditGroup() {
                     </div>
 
                     <div className='cancel-update' style={{ width: '102%' }}>
-                        <button type="button" onClick={() => navigate(-1)}>Cancel</button>
+                        <button type="button" onClick={() => navigate(`/group/${id}/`)}>Cancel</button>
                         <button type="button" onClick={updateGroupName}>Save</button>
                     </div>
 

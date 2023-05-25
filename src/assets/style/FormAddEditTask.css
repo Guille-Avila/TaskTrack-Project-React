@@ -233,7 +233,7 @@
   width: 34%;
 }
 
-.group-task-form h3 {
+.group-task-form > div > h3 {
   margin: 0;
   margin-left: 10px;
 }

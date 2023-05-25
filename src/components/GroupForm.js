@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "../assets/style/FormList.css";
-import { BsFillTrash3Fill } from 'react-icons/bs';
 import axios from 'axios';
+import { DropListContext } from '../components/DropListContext';
 
 const GroupForm = ({ show, handleButtonClick }) => {
 
     const [name, setName] = useState("");
     const navigate = useNavigate();
+    const { setGroupsLists } = useContext(DropListContext);
 
     const handleNameChange = (event) => {
         setName(event.target.value);
@@ -28,9 +29,15 @@ const GroupForm = ({ show, handleButtonClick }) => {
 
             // Process API response
             if (response.status === 201) {
-                const groupId = response.data.id;
-                navigate(`/add-edit-group/${groupId}`)
-                handleButtonClick();
+                if (window.location.pathname === '/add-edit-task') {
+                    setGroupsLists();
+                    handleButtonClick();
+                } else {
+                    const groupId = response.data.id;
+                    navigate(`/add-edit-group/${groupId}`);
+                    handleButtonClick();
+                    setGroupsLists();
+                }
             }
 
         } catch (error) {
@@ -41,7 +48,6 @@ const GroupForm = ({ show, handleButtonClick }) => {
     return (
 
         <div className='box-form-list'
-            // key={index}
             style={show ? { visibility: 'visible' } : { visibility: 'hidden' }}>
             <h3>Group Name</h3>
             <input

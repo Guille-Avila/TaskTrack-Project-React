@@ -5,7 +5,6 @@ import { BsFillTrash3Fill } from 'react-icons/bs';
 const ListForm = ({ show, handleButtonClick, title, page }) => {
 
     return (
-
         <div className='box-form-list'
             // key={index}
             style={show ? { visibility: 'visible' } : { visibility: 'hidden' }}>
