@@ -100,8 +100,6 @@ function AddEditGroup() {
 
     const handleDeleteGroup = () => {
         setShowMessage(!showMessage);
-        console.log(currentUser)
-        console.log(groupTitle)
     };
 
     const deleteGroup = async (event) => {
@@ -115,8 +113,6 @@ function AddEditGroup() {
             });
 
             // Process API response
-            console.log(response.status)
-
             if (response.status === 204) {
                 setGroupsLists();
                 navigate('/home');

@@ -1,45 +1,155 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SideBar from "../components/SideBar"
 import "../assets/style/Forms.css";
 import "../assets/style/FormAccount.css";
+import axios from 'axios';
 
 function Account() {
 
     const navigate = useNavigate();
-    const [showChangePassword, setShowChangePassword] = useState(false);
-    const [showDeleteAccount, setShowDeleteAccount] = useState(false);
+    const [boxChangePassword, setBoxChangePassword] = useState(false);
+    const [boxDeleteAccount, setBoxDeleteAccount] = useState(false);
+    const [userData, setUserData] = useState({});
+    const [currentUser, setCurrentUser] = useState(null);
+    const [passwords, setPasswords] = useState({
+        password: '',
+        new_password: '',
+        confirm_new_password: '',
 
-    const [formData, setFormData] = useState({
-        username: '',
-        fullName: '',
-        email: '',
-        telephone: '',
-        company: '',
-        college: '',
     });
 
-    const handleInputChange = (event) => {
-        const { name, value } = event.target;
-        setFormData((prevData) => ({
-            ...prevData,
-            [name]: value,
+    const fetchUser = async () => {
+        try {
+            const token = localStorage.getItem('token');
+            const response = await axios.get('http://localhost:8000/api/user/', {
+                headers: {
+                    Authorization: `Token ${token}`,
+                },
+            });
+            setUserData(response.data[0]);
+        } catch (error) {
+            console.error('Error obtain User:', error);
+            throw error;
+        }
+    };
+
+    const getCurrentUser = async () => {
+        try {
+            const token = localStorage.getItem('token');
+            const response = await axios.get('http://localhost:8000/api/current-user/', {
+                headers: {
+                    Authorization: `Token ${token}`,
+                },
+            });
+
+            setCurrentUser(response.data.id)
+        } catch (error) {
+            console.error('Error retrieving current user:', error);
+            return null;
+        }
+    };
+
+    const updateUser = async () => {
+        try {
+            const token = localStorage.getItem('token');
+            const response = await axios.put(`http://localhost:8000/api/user/${currentUser}/`,
+                userData,
+                {
+                    headers: {
+                        Authorization: `Token ${token}`,
+                    },
+                });
+
+            if (response.status === 200) {
+                navigate(-1);
+            }
+        } catch (error) {
+            console.error('Error update User:', error);
+            throw error;
+        }
+    };
+
+    const updateUserPassword = async () => {
+        console.log(userData);
+        try {
+            const token = localStorage.getItem('token');
+            const response = await axios.put(`http://localhost:8000/api/change-password/`,
+                passwords,
+                {
+                    headers: {
+                        Authorization: `Token ${token}`,
+                    },
+                });
+
+            if (response.status === 200) {
+                handleBoxChangePassword();
+                fetchUser();
+            }
+        } catch (error) {
+            console.error('Error update User:', error);
+            throw error;
+        }
+    };
+
+    const deleteUser = async () => {
+        console.log(userData);
+        try {
+            const token = localStorage.getItem('token');
+            const response = await axios.delete(`http://localhost:8000/api/user/${currentUser}/`, {
+                headers: {
+                    Authorization: `Token ${token}`,
+                },
+            });
+
+            if (response.status === 204) {
+                navigate('/login');
+            }
+        } catch (error) {
+            console.error('Error Deleting User:', error);
+            throw error;
+        }
+    };
+
+
+    useEffect(() => {
+        fetchUser();
+        getCurrentUser();
+        // eslint-disable-next-line
+    }, []);
+
+
+
+
+    const handleInputChange = (name, value) => {
+        setUserData((prevUserData) => ({
+            ...prevUserData,
+            [name]: value
         }));
     };
 
-    const handleChangePassword = () => {
-        setShowChangePassword(!showChangePassword);
+    const handleInputPasswordsChange = (event) => {
+        console.log(passwords);
+        const { name, value } = event.target;
+        setPasswords((prevPasswords) => ({
+            ...prevPasswords,
+            [name]: value
+        }));
     };
 
-    const handleDeleteAccount = () => {
-        setShowDeleteAccount(!showDeleteAccount);
+    const handleBoxChangePassword = () => {
+        setBoxChangePassword(!boxChangePassword);
+    };
+
+    const handleBoxDeleteAccount = () => {
+        setBoxDeleteAccount(!boxDeleteAccount);
     };
 
     const formElementsArray = [
         { label: 'User Name', type: 'text', name: 'username' },
-        { label: 'Full Name', type: 'text', name: 'fullName' },
+        { label: 'Full Name', type: 'text', name: 'name' },
         { label: 'Email', type: 'email', name: 'email' },
-        { label: 'Telephone', type: 'tel', name: 'telephone' },
+        { label: 'Telephone', type: 'tel', name: 'phone' },
         { label: 'Company', type: 'text', name: 'company' },
         { label: 'College', type: 'text', name: 'college' },
     ];
@@ -57,37 +167,55 @@ function Account() {
                                 <input
                                     type={element.type}
                                     name={element.name}
-                                    defaultValue={formData[element.name]}
+                                    value={userData[element.name] || ''}
                                     placeholder={`Enter a ${element.name}`}
-                                    onChange={handleInputChange}
+                                    onChange={(e) => handleInputChange(element.name, e.target.value)}
                                 />
                             </div>
                         ))}
 
+
+                        {/* Change Password ============================================== */}
+
                         <div className='change-password'>
-                            <button type='button' onClick={handleChangePassword}>Change password</button>
+                            <button type='button' onClick={handleBoxChangePassword}>Change password</button>
                             <div className='box-form-list'
-                                style={showChangePassword ? { visibility: 'visible' } : { visibility: 'hidden' }}>
+                                style={boxChangePassword ? { visibility: 'visible' } : { visibility: 'hidden' }}>
                                 <h3>Change Password</h3>
-                                <input type='text' placeholder='Password' ></input>
-                                <input type='text' placeholder='New Password'></input>
-                                <input type='text' placeholder='Confirm new password'></input>
+                                <input
+                                    type='text'
+                                    placeholder='Password'
+                                    value={passwords.password}
+                                    onChange={handleInputPasswordsChange}
+                                    name='password' />
+                                <input
+                                    type='text'
+                                    placeholder='New Password'
+                                    value={passwords.new_password}
+                                    onChange={handleInputPasswordsChange}
+                                    name='new_password' />
+                                <input
+                                    type='text'
+                                    placeholder='Confirm new password'
+                                    value={passwords.confirm_new_password}
+                                    onChange={handleInputPasswordsChange}
+                                    name='confirm_new_password' />
                                 <div>
-                                    <button type="button" onClick={handleChangePassword}>Cancel</button>
-                                    <button type="button" onClick={handleChangePassword}>Save</button>
+                                    <button type="button" onClick={handleBoxChangePassword}>Cancel</button>
+                                    <button type="button" onClick={updateUserPassword}>Save</button>
                                 </div>
                             </div>
                         </div>
 
                         <div className='delete-account'>
-                            <button type="button" onClick={handleDeleteAccount}>Delete account</button>
+                            <button type="button" onClick={handleBoxDeleteAccount}>Delete account</button>
                             <div className='message-box-delete'
-                                style={showDeleteAccount ? { visibility: 'visible' } : { visibility: 'hidden' }}>
+                                style={boxDeleteAccount ? { visibility: 'visible' } : { visibility: 'hidden' }}>
                                 <p>Do you want delete your account?</p>
                                 {/* <p>{task.name}</p> */}
                                 <div>
-                                    <button type="button" onClick={handleDeleteAccount}>No</button>
-                                    <button type="button" onClick={handleDeleteAccount}>Yes</button>
+                                    <button type="button" onClick={handleBoxDeleteAccount}>No</button>
+                                    <button type="button" onClick={deleteUser}>Yes</button>
                                 </div>
                             </div>
                         </div>
@@ -96,7 +224,7 @@ function Account() {
 
                     <div className='cancel-update'>
                         <button type="button" onClick={() => navigate(-1)}>Cancel</button>
-                        <button type="button" onClick={() => navigate(-1)}>Update</button>
+                        <button type="button" onClick={updateUser}>Update</button>
                     </div>
 
                 </form>

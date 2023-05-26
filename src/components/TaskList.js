@@ -32,7 +32,6 @@ const TaskList = ({ tasks, taskMessage, fetchChanges }) => {
 
     const doneTask = async (task) => {
         // event.preventDefault();
-        console.log(task);
         try {
             const date = new Date();
             const token = localStorage.getItem('token');
@@ -47,7 +46,6 @@ const TaskList = ({ tasks, taskMessage, fetchChanges }) => {
             });
 
             // Process API response
-            console.log(response.status)
             fetchChanges();
             response.status === 200 && handleButtonClick();
         } catch (error) {
@@ -57,7 +55,6 @@ const TaskList = ({ tasks, taskMessage, fetchChanges }) => {
 
     const deleteTask = async (task) => {
         // event.preventDefault();
-        console.log(task);
         try {
             const token = localStorage.getItem('token');
             const response = await axios.delete(`http://localhost:8000/api/tasks/${task.id}/`, {
@@ -67,7 +64,6 @@ const TaskList = ({ tasks, taskMessage, fetchChanges }) => {
             });
 
             // Process API response
-            console.log(response.status)
             fetchChanges();
             response.status === 204 && handleButtonClick();
         } catch (error) {

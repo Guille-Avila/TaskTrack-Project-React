@@ -40,7 +40,6 @@ function Login() {
             });
 
             // Process API response
-            console.log(response.status)
             const token = response.data.token;
             localStorage.setItem('token', token);
             response.status === 200 && navigate('/home');

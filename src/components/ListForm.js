@@ -87,14 +87,9 @@ const ListForm = ({ show, handleButtonClick, title, page }) => {
 
             // Process API response
             if (response.status === 204) {
-                // if (window.location.pathname === '/add-edit-task') {
-                //     setGroupsLists();
-                //     handleButtonClick();
-                // } else {
                 handleButtonClick();
                 setGroupsLists();
                 navigate(-1);
-                // }
             }
 
         } catch (error) {
@@ -103,20 +98,18 @@ const ListForm = ({ show, handleButtonClick, title, page }) => {
     }
 
     useEffect(() => {
-        setName(title);
+        title && setName(title);
         // eslint-disable-next-line
     }, []);
 
     return (
         <div className='box-form-list'
-            // key={index}
             style={show ? { visibility: 'visible' } : { visibility: 'hidden' }}>
             <h3>List Name</h3>
             <input type='text'
                 placeholder='Enter a list name'
                 value={name}
                 onChange={handleNameChange} />
-            {/* <p>{task.name}</p> */}
             {page === 'list' &&
                 <button className='delete' type="button" onClick={deleteList}><BsFillTrash3Fill /><p>Delete</p></button>
             }

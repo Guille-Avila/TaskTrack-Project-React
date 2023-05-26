@@ -44,8 +44,6 @@ function Group() {
         } finally {
             setIsFetching(false);
         }
-        console.log(id);
-        console.log(tasks);
     };
 
     const fetchGroup = async () => {
@@ -58,7 +56,6 @@ function Group() {
             });
 
             // Process API response
-            console.log(response.status)
             if (response.status === 200) {
                 setTitle(response.data.name)
             }

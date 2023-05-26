@@ -45,8 +45,6 @@ function List() {
         } finally {
             setIsFetching(false);
         }
-        console.log(listId);
-        console.log(tasks);
     };
 
     const fetchChanges = () => {

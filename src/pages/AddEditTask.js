@@ -118,7 +118,6 @@ function AddEditTask() {
             });
 
             // Process API response
-            console.log(response.status)
             response.status === 200 && navigate(-1);
 
         } catch (error) {
@@ -163,7 +162,6 @@ function AddEditTask() {
             });
 
             // Process API response
-            console.log(response.status)
             response.status === 204 && navigate(-1);
 
         } catch (error) {
