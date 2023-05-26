@@ -1,11 +1,12 @@
 import React, { useContext } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useNavigate } from 'react-router-dom';
 import logo from "../assets/images/logo-slogan.png";
 import DropList from "./DropList";
 import "../assets/style/SideBar.css";
 import { FaRegAddressBook, FaRegCalendarCheck, FaRegCalendarTimes, FaRegCheckCircle, FaRegUserCircle, FaSignInAlt } from 'react-icons/fa';
 import { HiUserGroup } from "react-icons/hi";
 import { DropListContext } from './DropListContext';
+import axios from 'axios';
 
 const navLinks = [
     { to: '/home', icon: <FaRegAddressBook />, text: 'All Tasks' },
@@ -17,6 +18,26 @@ const navLinks = [
 function SideBar() {
 
     const { groups, lists } = useContext(DropListContext);
+    const navigate = useNavigate();
+
+    const handleSignOut = async (event) => {
+        event.preventDefault();
+        try {
+            const token = localStorage.getItem('token');
+            const response = await axios.post(`http://localhost:8000/api/logout/`, {}, {
+                headers: {
+                    Authorization: `Token ${token}`,
+                },
+            });
+            // Process API response
+            if (response.status === 200) {
+                navigate('/');
+                localStorage.removeItem('token');
+            }
+        } catch (error) {
+            console.error('Error Logout:', error);
+        }
+    };
 
     const dataGroups = <ul>
         {groups.map((group, index) => (
@@ -68,7 +89,7 @@ function SideBar() {
 
             <ul className='footer-sidebar'>
                 <li><NavLink className='link-nav-bar' to="/account"><FaRegUserCircle />Account</NavLink></li>
-                <li><NavLink className='link-nav-bar' to="/login"><FaSignInAlt />Sign out</NavLink></li>
+                <li><Link className='link-nav-bar' onClick={handleSignOut}><FaSignInAlt />Sign out</Link></li>
 
             </ul>
 
