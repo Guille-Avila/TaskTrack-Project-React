@@ -26,10 +26,17 @@ const HeaderTasks = ({ title }) => {
     currentUrl.startsWith('/group') ? navigate(destination) : setShowListForm(!showListForm);
   };
 
+  const firstLetterUppercase = (text) => {
+    return text.length > 20 ?
+        text.charAt(0).toUpperCase() +
+        text.slice(1, 15) + '...' :
+        text.charAt(0).toUpperCase() +
+        text.slice(1)
+}
   return (
     <div className='header-tasks'>
       <div>
-        <h1>{title}</h1>
+        <h1>{title && firstLetterUppercase(title)}</h1>
 
         {(currentUrl.startsWith('/group') || currentUrl.startsWith('/list')) &&
           <div className='add-edit-task-form-header' >

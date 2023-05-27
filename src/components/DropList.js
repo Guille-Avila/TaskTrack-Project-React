@@ -36,8 +36,7 @@ function DropList(props) {
                 </Link>
             </div>
 
-
-            <ListForm show={showListForm} handleButtonClick={handleListForm}></ListForm >
+            <ListForm show={showListForm} handleButtonClick={handleListForm} ></ListForm >
             <GroupForm show={showGroupForm} handleButtonClick={handleGroupForm}></GroupForm >
 
             {isOpen[name] && (

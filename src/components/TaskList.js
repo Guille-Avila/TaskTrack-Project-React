@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { BsFillCircleFill, BsFillTrash3Fill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { FaEdit, FaRegCheckCircle } from 'react-icons/fa';
 
 const TaskList = ({ tasks, taskMessage, fetchChanges }) => {
 
@@ -131,8 +132,8 @@ const TaskList = ({ tasks, taskMessage, fetchChanges }) => {
 
                             </div>
                             : <div className='task-actions'>
-                                <Link className='edit-task' to={`/add-edit-task/${task.id}`}>Edit</Link>
-                                <button className='done-task' onClick={() => handleButtonClick(index)}>Done</button>
+                                <Link className='edit-task' to={`/add-edit-task/${task.id}`}><FaEdit />Edit</Link>
+                                <button className='done-task' onClick={() => handleButtonClick(index)}><FaRegCheckCircle />Done</button>
 
                                 <div className='message-box-done'
                                     key={index}

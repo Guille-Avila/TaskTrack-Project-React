@@ -203,6 +203,20 @@
   margin-right: 15px;
 }
 
+.edit-task svg {
+  margin: 0;
+  margin-right: 5px;
+  width: 18px;
+  height: 18px;
+}
+
+.done-task svg {
+  margin: 0;
+  margin-right: 5px;
+  width: 17px;
+  height: 17px;
+}
+
 .edit-task:hover,
 .done-task:hover,
 .delete-task:hover {

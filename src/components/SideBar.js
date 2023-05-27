@@ -39,6 +39,14 @@ function SideBar() {
         }
     };
 
+    const firstLetterUppercase = (text) => {
+        return text.length > 18 ?
+            text.charAt(0).toUpperCase() +
+            text.slice(1, 15) + '...' :
+            text.charAt(0).toUpperCase() +
+            text.slice(1)
+    }
+
     const dataGroups = <ul>
         {groups.map((group, index) => (
             <li key={index}>
@@ -46,7 +54,7 @@ function SideBar() {
                     className='link-drop-list'
                     to={`/group/${group?.id}/`}>
                     <HiUserGroup />
-                    {group.name}
+                    {firstLetterUppercase(group.name)}
                 </NavLink>
             </li>))}
     </ul>;
@@ -58,7 +66,7 @@ function SideBar() {
                     to={`/list/${list?.id}/`}
                     className='link-drop-list'>
                     <div className="square" />
-                    {list.name}
+                    {firstLetterUppercase(list.name)}
                 </NavLink>
             </li>))}
     </ul>;

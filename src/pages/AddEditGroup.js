@@ -84,7 +84,6 @@ function AddEditGroup() {
             }
         };
         fetchGroup();
-        
         // eslint-disable-next-line
     }, [id])
 
@@ -184,7 +183,6 @@ function AddEditGroup() {
                 });
 
             // Process API response
-            console.log(response.status)
             if (response.status === 200) {
                 setGroupsLists();
                 navigate(`/group/${id}/`);

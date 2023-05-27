@@ -22,13 +22,18 @@
   display: flex;
   align-items: center;
   cursor: pointer;
+  white-space: nowrap;
 }
 
 .add-edit-task-form-header svg {
   margin-right: 10px;
-  font-size: 20px;
+  /* font-size: 20px; */
   margin-bottom: 3px;
   color: black;
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  min-height: 20px;
 }
 
 .message-box-delete {

@@ -1,14 +1,16 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "../assets/style/FormList.css";
 import axios from 'axios';
 import { DropListContext } from '../components/DropListContext';
+import { useParams } from 'react-router-dom';
 
 const GroupForm = ({ show, handleButtonClick }) => {
 
     const [name, setName] = useState("");
     const navigate = useNavigate();
     const { setGroupsLists } = useContext(DropListContext);
+    const { id } = useParams();
 
     const handleNameChange = (event) => {
         setName(event.target.value);
@@ -44,6 +46,11 @@ const GroupForm = ({ show, handleButtonClick }) => {
             console.error('Error Create Group:', error);
         }
     }
+
+    useEffect(() => {
+        show && handleButtonClick();
+        // eslint-disable-next-line
+    }, [id]);
 
     return (
 

@@ -12,6 +12,7 @@ import AddEditTask from "./pages/AddEditTask";
 import AddEditGroup from "./pages/AddEditGroup";
 import Group from "./pages/Group";
 import List from "./pages/List";
+import RestartPassword from "./pages/RestartPassword";
 import { DropListProvider } from './components/DropListContext';
 import axios from 'axios';
 
@@ -69,7 +70,7 @@ function AppWithContext() {
     <DropListProvider>
       {isLoggedIn ?
         <Routes>
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Navigate to="/home" />} />
           <Route path="/home" element={<Home />} />
           <Route path="/today" element={<Today />} />
           <Route path="/due-tasks" element={<DueTasks />} />
@@ -96,6 +97,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/recover-password" element={<RecoverPassword />} />
+        <Route path="/restart-password" element={<RestartPassword />} />
         <Route path="/*" element={<AppWithContext />} />
       </Routes>
     </BrowserRouter>

@@ -39,17 +39,20 @@ function AddEditTask() {
             }
         };
         fetchTask();
+        // eslint-disable-next-line
     }, [id]);
 
     const navigate = useNavigate();
     const { groups, lists } = useContext(DropListContext);
-    const [boxDeleteTask, setBoxDeleteTask] = useState(false);
-    const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
-    const [dueDate, setDueDate] = useState("");
+
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
+    const [dueDate, setDueDate] = useState('');
     const [priority, setPriority] = useState(null);
     const [list, setList] = useState(null);
     const [group, setGroup] = useState(null);
+
+    const [boxDeleteTask, setBoxDeleteTask] = useState(false);
     const [showListForm, setShowListForm] = useState(false);
     const [showGroupForm, setShowGroupForm] = useState(false);
 
@@ -204,14 +207,14 @@ function AddEditTask() {
                             <h3>Title</h3>
                             <input
                                 type='text'
-                                value={title}
+                                value={title ? title : ''}
                                 placeholder='Enter a Title'
                                 onChange={handleTitleChange} />
                         </div>
 
                         <textarea
                             className='textarea-task-form'
-                            value={description}
+                            value={description ? description : ''}
                             onChange={handleDescriptionChange}
                             placeholder='Enter a description for this task...'
                         />
@@ -221,7 +224,7 @@ function AddEditTask() {
                             <input
                                 className='input-date'
                                 type='date'
-                                value={dueDate}
+                                value={dueDate ? dueDate : ''}
                                 placeholder='dd/mm/yyyy'
                                 onChange={handleDueDateChange} />
 

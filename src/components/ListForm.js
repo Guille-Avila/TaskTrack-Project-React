@@ -6,7 +6,7 @@ import axios from 'axios';
 import { DropListContext } from '../components/DropListContext';
 import { useParams } from 'react-router-dom';
 
-const ListForm = ({ show, handleButtonClick, title, page }) => {
+const ListForm = ({ show, handleButtonClick, title, page}) => {
 
     const navigate = useNavigate();
     const [name, setName] = useState("");
@@ -61,15 +61,9 @@ const ListForm = ({ show, handleButtonClick, title, page }) => {
 
             // Process API response
             if (response.status === 200) {
-                // if (window.location.pathname === '/add-edit-task') {
-                //     setGroupsLists();
-                //     handleButtonClick();
-                // } else {
                 handleButtonClick();
                 setGroupsLists();
-                // }
             }
-
         } catch (error) {
             console.error('Error Creating List:', error);
         }
@@ -98,9 +92,16 @@ const ListForm = ({ show, handleButtonClick, title, page }) => {
     }
 
     useEffect(() => {
-        title && setName(title);
+        title ? setName(title) : setName('');
         // eslint-disable-next-line
-    }, []);
+    }, [handleButtonClick]);
+
+    useEffect(() => {
+        show && handleButtonClick();
+        // eslint-disable-next-line
+    }, [listId]);
+
+
 
     return (
         <div className='box-form-list'
@@ -115,7 +116,7 @@ const ListForm = ({ show, handleButtonClick, title, page }) => {
             }
             <div>
                 <button type="button" onClick={handleButtonClick}>Cancel</button>
-                <button type="button" onClick={listId ? updateList : createList}>Save</button>
+                <button type="button" onClick={page === 'list' ? updateList : createList}>Save</button>
             </div>
 
         </div>
