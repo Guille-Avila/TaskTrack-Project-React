@@ -5,6 +5,21 @@
   flex-direction: column;
 }
 
+@media (max-width: 900px) {
+  .container-tasks {
+    padding-top: 0;
+  }
+
+  .header-tasks-title {
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+
+  .header-tasks {
+    margin-top: 40px;
+  }
+}
+
 /* header ---------------- */
 
 .header-tasks {
@@ -13,12 +28,14 @@
   align-items: center;
 }
 
-.header-tasks > div {
+.header-tasks-title {
   display: flex;
+  align-items: center;
 }
 
 .header-tasks h1 {
   white-space: nowrap;
+  margin: 0;
   margin-right: 20px;
 }
 
@@ -38,6 +55,12 @@
   font-size: 14px;
   font-style: italic;
   margin-right: -28px;
+}
+
+@media (max-width: 900px) {
+  .search-bar {
+    display: none;
+  }
 }
 
 /* filter tasks ----------------- */
@@ -61,6 +84,12 @@
 .filter-tasks button.active {
   border: 1px solid rgba(0, 0, 0);
   color: rgba(0, 0, 0);
+}
+
+@media (max-width: 900px) {
+  .filter-tasks {
+    margin-top: 10px;
+  }
 }
 
 /* Tasks -------------------- */
@@ -98,6 +127,7 @@
 
 .name-description-task {
   margin-left: 15px;
+  white-space: nowrap;
 }
 
 .name-description-task h2,

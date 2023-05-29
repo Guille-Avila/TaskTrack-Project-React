@@ -29,7 +29,7 @@ function Home() {
                 const tasksData = await fetchTasks();
                 const tasksDue = filterDue(tasksData);
                 setTasks(tasksDue);
-                if (tasks.length !== changeTasks.length) { 
+                if (tasks.length !== changeTasks.length) {
                     setChangeTasks(tasksDue)
                 }
             } catch (error) {
@@ -37,7 +37,7 @@ function Home() {
             }
         };
         fetchData();
-        
+
     }
 
     useEffect(() => {
@@ -58,7 +58,7 @@ function Home() {
     return (
         <div className='container-sidebar-interface'>
             <SideBar />
-            <InterfaceTasks title={title} buttons={buttons} tasks={tasks} taskMessage={taskMessage} fetchChanges={fetchChanges}/>
+            <InterfaceTasks title={title} buttons={buttons} tasks={tasks} taskMessage={taskMessage} fetchChanges={fetchChanges} />
         </div>
     );
 }

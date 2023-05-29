@@ -8,6 +8,62 @@
   overflow-y: auto;
 }
 
+.toggle-sidebar {
+  display: none;
+  width: 100%;
+  background-color: #e6d435;
+  position: fixed;
+}
+
+.toggle-sidebar h3 {
+  margin: 0;
+  margin-left: -15px;
+}
+
+.toggle-sidebar svg {
+  padding-right: 15px;
+  cursor: pointer;
+}
+
+.toggle-sidebar-button {
+  all: unset;
+  padding: 2px 8px;
+  cursor: pointer;
+  border-radius: 0 0 10px;
+}
+
+.toggle-sidebar-button svg {
+  width: 30px;
+  height: 30px;
+  margin-top: 4px;
+}
+
+.toggle-sidebar-back-button {
+  all: unset;
+  text-align: right;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.toggle-sidebar-back-button svg {
+  width: 30px;
+  height: 30px;
+}
+
+@media (max-width: 900px) {
+  .toggle-sidebar  {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+  }
+  .container-side-bar {
+    display: none;
+    position: absolute;
+    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.2);
+  }
+}
+
 /* logo slogan ------------------- */
 
 .logo-slogan-side-bar {
@@ -18,6 +74,13 @@
 
 .logo-slogan-side-bar * {
   width: 100%;
+}
+
+@media (max-width: 900px) {
+  .logo-slogan-side-bar {
+    padding-top: 0;
+    margin-top: 0;
+  }
 }
 
 /* nav bar --------------------- */
@@ -143,7 +206,6 @@
 .link-drop-list.active {
   background-color: #e6d435;
   box-shadow: inset 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  
 }
 
 .dropdown-container-list svg {

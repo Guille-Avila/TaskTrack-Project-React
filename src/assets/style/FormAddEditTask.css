@@ -3,6 +3,12 @@
   flex-wrap: wrap;
 }
 
+@media (max-width: 900px) {
+  .add-edit-task-form {
+    margin-top: 25px;
+  }
+}
+
 /* header ------------------- */
 
 .add-edit-task-form-header {

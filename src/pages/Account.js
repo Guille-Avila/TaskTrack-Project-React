@@ -4,6 +4,12 @@ import SideBar from "../components/SideBar"
 import "../assets/style/Forms.css";
 import "../assets/style/FormAccount.css";
 import axios from 'axios';
+import { FaRegUserCircle } from 'react-icons/fa';
+import { FiClipboard } from 'react-icons/fi';
+import { HiOutlineMail, HiOutlineOfficeBuilding } from 'react-icons/hi';
+import { MdOutlineSmartphone } from 'react-icons/md';
+import { AiOutlineBook } from 'react-icons/ai';
+
 
 function Account() {
 
@@ -146,12 +152,12 @@ function Account() {
     };
 
     const formElementsArray = [
-        { label: 'User Name', type: 'text', name: 'username' },
-        { label: 'Full Name', type: 'text', name: 'name' },
-        { label: 'Email', type: 'email', name: 'email' },
-        { label: 'Telephone', type: 'tel', name: 'phone' },
-        { label: 'Company', type: 'text', name: 'company' },
-        { label: 'College', type: 'text', name: 'college' },
+        { icon: FaRegUserCircle, label: 'User Name', type: 'text', name: 'username' },
+        { icon: FiClipboard, label: 'Full Name', type: 'text', name: 'name' },
+        { icon: HiOutlineMail, label: 'Email', type: 'email', name: 'email' },
+        { icon: MdOutlineSmartphone, label: 'Telephone', type: 'tel', name: 'phone' },
+        { icon: HiOutlineOfficeBuilding, label: 'Company', type: 'text', name: 'company' },
+        { icon: AiOutlineBook, label: 'College', type: 'text', name: 'college' },
     ];
 
     return (
@@ -163,7 +169,11 @@ function Account() {
                         <h1>Account</h1>
                         {formElementsArray.map((element) => (
                             <div className='form-account-div' key={element.name}>
-                                <h3 className='form-account-titles'>{element.label}</h3>
+                                <div style={{ display: 'flex' }}>
+                                    <element.icon />
+                                    <h3 className='form-account-titles'>{element.label}</h3>
+
+                                </div>
                                 <input
                                     type={element.type}
                                     name={element.name}

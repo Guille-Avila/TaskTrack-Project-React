@@ -1,5 +1,6 @@
 .container-sidebar-forms {
   display: flex;
+  height: 100%;
 }
 
 .container-forms {
@@ -12,4 +13,3 @@
   display: flex;
   flex-direction: column;
 }
-

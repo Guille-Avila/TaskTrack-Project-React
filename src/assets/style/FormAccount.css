@@ -3,6 +3,19 @@
   flex-wrap: wrap;
 }
 
+@media (max-width: 900px) {
+  .form-account {
+    margin-top: 20px;
+  }
+}
+.form-account svg {
+  height: 20px;
+  width: 20px;
+  margin-right: 5px;
+  margin-left: 5px;
+  margin-top: 2px;
+}
+
 .form-account h1 {
   width: 100%;
   margin-bottom: 45px;
@@ -14,7 +27,7 @@
   margin-top: 0;
 }
 
-.form-account-div{
+.form-account-div {
   width: 50%;
   margin-bottom: 15px;
 }

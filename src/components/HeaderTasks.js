@@ -28,14 +28,14 @@ const HeaderTasks = ({ title }) => {
 
   const firstLetterUppercase = (text) => {
     return text.length > 20 ?
-        text.charAt(0).toUpperCase() +
-        text.slice(1, 15) + '...' :
-        text.charAt(0).toUpperCase() +
-        text.slice(1)
-}
+      text.charAt(0).toUpperCase() +
+      text.slice(1, 15) + '...' :
+      text.charAt(0).toUpperCase() +
+      text.slice(1)
+  }
   return (
     <div className='header-tasks'>
-      <div>
+      <div className='header-tasks-title '>
         <h1>{title && firstLetterUppercase(title)}</h1>
 
         {(currentUrl.startsWith('/group') || currentUrl.startsWith('/list')) &&

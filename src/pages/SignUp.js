@@ -48,7 +48,6 @@ function SignUp() {
 
             // Process API response
             const token = response.data.token;
-            console.log(response.data);
             localStorage.setItem('token', token);
             response.status === 201 && navigate('/home');
 
