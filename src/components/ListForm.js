@@ -21,7 +21,7 @@ const ListForm = ({ show, handleButtonClick, title, page}) => {
         event.preventDefault();
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.post(`http://localhost:8000/api/lists/`, {
+            const response = await axios.post(`https://tasktrack-project-django-production.up.railway.app/api/lists/`, {
                 name: name,
             }, {
                 headers: {
@@ -51,7 +51,7 @@ const ListForm = ({ show, handleButtonClick, title, page}) => {
         event.preventDefault();
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.put(`http://localhost:8000/api/lists/${listId}/`, {
+            const response = await axios.put(`https://tasktrack-project-django-production.up.railway.app/api/lists/${listId}/`, {
                 name: name,
             }, {
                 headers: {
@@ -73,7 +73,7 @@ const ListForm = ({ show, handleButtonClick, title, page}) => {
         event.preventDefault();
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.delete(`http://localhost:8000/api/lists/${listId}/`, {
+            const response = await axios.delete(`https://tasktrack-project-django-production.up.railway.app/api/lists/${listId}/`, {
                 headers: {
                     Authorization: `Token ${token}`,
                 },

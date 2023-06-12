@@ -34,7 +34,7 @@ function Login() {
         event.preventDefault();
 
         try {
-            const response = await axios.post('http://localhost:8000/api/login/', {
+            const response = await axios.post('https://tasktrack-project-django-production.up.railway.app/api/login/', {
                 email,
                 password,
             });

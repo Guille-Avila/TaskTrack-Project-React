@@ -26,7 +26,7 @@ const MemberForm = ({ show, handleButtonClick, id, fetchMembers }) => {
 
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.post(`http://localhost:8000/api/members/${id}/`, {
+            const response = await axios.post(`https://tasktrack-project-django-production.up.railway.app/api/members/${id}/`, {
                 username: username,
                 email: email,
             }, {

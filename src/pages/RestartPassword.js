@@ -39,7 +39,7 @@ function RestartPassword() {
             const pk = urlParams.get('pk');
             const token = urlParams.get('token');
             console.log(pk, token);
-            const response = await axios.patch(`http://127.0.0.1:8000/api/reset-password/${pk}/${token}/`, {
+            const response = await axios.patch(`https://tasktrack-project-django-production.up.railway.app/api/reset-password/${pk}/${token}/`, {
                 password: password,
                 password_confirm: confirmPassword
             });

@@ -22,13 +22,12 @@ function Account() {
         password: '',
         new_password: '',
         confirm_new_password: '',
-
     });
 
     const fetchUser = async () => {
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.get('http://localhost:8000/api/user/', {
+            const response = await axios.get('https://tasktrack-project-django-production.up.railway.app/api/user/', {
                 headers: {
                     Authorization: `Token ${token}`,
                 },
@@ -43,7 +42,7 @@ function Account() {
     const getCurrentUser = async () => {
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.get('http://localhost:8000/api/current-user/', {
+            const response = await axios.get('https://tasktrack-project-django-production.up.railway.app/api/current-user/', {
                 headers: {
                     Authorization: `Token ${token}`,
                 },
@@ -59,7 +58,7 @@ function Account() {
     const updateUser = async () => {
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.put(`http://localhost:8000/api/user/${currentUser}/`,
+            const response = await axios.put(`https://tasktrack-project-django-production.up.railway.app/api/user/${currentUser}/`,
                 userData,
                 {
                     headers: {
@@ -77,10 +76,9 @@ function Account() {
     };
 
     const updateUserPassword = async () => {
-        console.log(userData);
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.put(`http://localhost:8000/api/change-password/`,
+            const response = await axios.put(`https://tasktrack-project-django-production.up.railway.app/api/change-password/`,
                 passwords,
                 {
                     headers: {
@@ -102,7 +100,7 @@ function Account() {
         console.log(userData);
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.delete(`http://localhost:8000/api/user/${currentUser}/`, {
+            const response = await axios.delete(`https://tasktrack-project-django-production.up.railway.app/api/user/${currentUser}/`, {
                 headers: {
                     Authorization: `Token ${token}`,
                 },
@@ -117,15 +115,11 @@ function Account() {
         }
     };
 
-
     useEffect(() => {
         fetchUser();
         getCurrentUser();
         // eslint-disable-next-line
     }, []);
-
-
-
 
     const handleInputChange = (name, value) => {
         setUserData((prevUserData) => ({
@@ -135,7 +129,6 @@ function Account() {
     };
 
     const handleInputPasswordsChange = (event) => {
-        console.log(passwords);
         const { name, value } = event.target;
         setPasswords((prevPasswords) => ({
             ...prevPasswords,
@@ -145,6 +138,11 @@ function Account() {
 
     const handleBoxChangePassword = () => {
         setBoxChangePassword(!boxChangePassword);
+        setPasswords({
+            password: '',
+            new_password: '',
+            confirm_new_password: ''
+        });
     };
 
     const handleBoxDeleteAccount = () => {

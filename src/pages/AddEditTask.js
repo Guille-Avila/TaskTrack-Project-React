@@ -27,7 +27,7 @@ function AddEditTask() {
             if (id) {
                 try {
                     const token = localStorage.getItem('token');
-                    const response = await axios.get(`http://localhost:8000/api/tasks/${id}/`, {
+                    const response = await axios.get(`https://tasktrack-project-django-production.up.railway.app/api/tasks/${id}/`, {
                         headers: {
                             Authorization: `Token ${token}`,
                         },
@@ -107,7 +107,7 @@ function AddEditTask() {
         event.preventDefault();
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.put(`http://localhost:8000/api/tasks/${id}/`, {
+            const response = await axios.put(`https://tasktrack-project-django-production.up.railway.app/api/tasks/${id}/`, {
                 title: title,
                 description: description === "" ? null : description,
                 due_date: dueDate === "" ? null : dueDate,
@@ -133,7 +133,7 @@ function AddEditTask() {
 
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.post(`http://localhost:8000/api/tasks/`, {
+            const response = await axios.post(`https://tasktrack-project-django-production.up.railway.app/api/tasks/`, {
                 title: title,
                 description: description === "" ? null : description,
                 due_date: dueDate === "" ? null : dueDate,
@@ -158,7 +158,7 @@ function AddEditTask() {
         event.preventDefault();
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.delete(`http://localhost:8000/api/tasks/${id}/`, {
+            const response = await axios.delete(`https://tasktrack-project-django-production.up.railway.app/api/tasks/${id}/`, {
                 headers: {
                     Authorization: `Token ${token}`,
                 },

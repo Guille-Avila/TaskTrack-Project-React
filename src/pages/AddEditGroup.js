@@ -32,7 +32,7 @@ function AddEditGroup() {
     const getCurrentUser = async () => {
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.get('http://localhost:8000/api/current-user/', {
+            const response = await axios.get('https://tasktrack-project-django-production.up.railway.app/api/current-user/', {
                 headers: {
                     Authorization: `Token ${token}`,
                 },
@@ -48,7 +48,7 @@ function AddEditGroup() {
     const fetchMembers = async () => {
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.get(`http://localhost:8000/api/members/${id}/`, {
+            const response = await axios.get(`https://tasktrack-project-django-production.up.railway.app/api/members/${id}/`, {
                 headers: {
                     Authorization: `Token ${token}`,
                 },
@@ -56,7 +56,7 @@ function AddEditGroup() {
             setMembers(response.data);
             setEmail(response.data.filter((member) => member?.email).map((member) => member?.email));
         } catch (error) {
-            console.error('Error al obtener las tareas:', error);
+            console.error('Error al obtener los miembros:', error);
         }
     };
 
@@ -71,7 +71,7 @@ function AddEditGroup() {
             if (id) {
                 try {
                     const token = localStorage.getItem('token');
-                    const response = await axios.get(`http://localhost:8000/api/groups/${id}/`, {
+                    const response = await axios.get(`https://tasktrack-project-django-production.up.railway.app/api/groups/${id}/`, {
                         headers: {
                             Authorization: `Token ${token}`,
                         },
@@ -105,7 +105,7 @@ function AddEditGroup() {
         event.preventDefault();
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.delete(`http://localhost:8000/api/groups/${id}/`, {
+            const response = await axios.delete(`https://tasktrack-project-django-production.up.railway.app/api/groups/${id}/`, {
                 headers: {
                     Authorization: `Token ${token}`,
                 },
@@ -122,26 +122,27 @@ function AddEditGroup() {
         }
     }
 
-    const deleteMemberAPI = async (memberId) => {
+    const deleteMemberAPI = async (event, memberId) => {
+        event.preventDefault();
         try {
             const token = localStorage.getItem('token');
-            console.log(id, memberId);
-            const response = await axios.delete(`http://localhost:8000/api/members/${id}/`, {
-                data: { user_id: memberId },
+
+            const response = await axios.delete(`https://tasktrack-project-django-production.up.railway.app/api/members/${id}/${memberId}/`, {
                 headers: {
                     Authorization: `Token ${token}`,
-                },
+                    Accept: 'text/html; charset=utf-8'
+                }
             });
 
             // Process API response
-            console.log(response.status)
-            if (response.status === 204) {
+            if (response.status === 200) {
                 handleDeleteMember();
                 fetchMembers();
             }
-
         } catch (error) {
             console.error('Error Delete Member:', error);
+            handleDeleteMember();
+            fetchMembers();
         }
     }
 
@@ -149,7 +150,7 @@ function AddEditGroup() {
         event.preventDefault();
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.put(`http://localhost:8000/api/members/${id}/${memberId}/`, {
+            const response = await axios.put(`https://tasktrack-project-django-production.up.railway.app/api/members/${id}/${memberId}/`, {
                 email: email
             },
                 {
@@ -158,8 +159,8 @@ function AddEditGroup() {
                     },
                 });
 
+            console.log(response);
             // Process API response
-            console.log(response.status)
             if (response.status === 200) {
                 handleIndexMember();
                 fetchMembers();
@@ -173,7 +174,7 @@ function AddEditGroup() {
     const updateGroupName = async () => {
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.put(`http://localhost:8000/api/groups/${id}/`, {
+            const response = await axios.put(`https://tasktrack-project-django-production.up.railway.app/api/groups/${id}/`, {
                 name: groupTitle
             },
                 {
@@ -313,7 +314,7 @@ function AddEditGroup() {
                                                         <p>'{firstLetterUppercase(member?.username)}'</p>
                                                         <div>
                                                             <button type="button" onClick={handleDeleteMember}>No</button>
-                                                            <button type="button" onClick={() => deleteMemberAPI(member?.id)}>Yes</button>
+                                                            <button type="button" onClick={(event) => deleteMemberAPI(event, member.id)}>Yes</button>
                                                         </div>
                                                     </div>}
 

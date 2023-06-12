@@ -26,7 +26,7 @@ function SideBar() {
         event.preventDefault();
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.post(`http://localhost:8000/api/logout/`, {}, {
+            const response = await axios.post(`https://tasktrack-project-django-production.up.railway.app/api/logout/`, {}, {
                 headers: {
                     Authorization: `Token ${token}`,
                 },

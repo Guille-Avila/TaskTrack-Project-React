@@ -40,7 +40,7 @@ function SignUp() {
         event.preventDefault();
 
         try {
-            const response = await axios.post('http://127.0.0.1:8000/api/register/', {
+            const response = await axios.post('https://tasktrack-project-django-production.up.railway.app/api/register/', {
                 email: email,
                 password: password,
                 password_confirm: confirmPassword

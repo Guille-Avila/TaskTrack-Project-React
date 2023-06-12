@@ -25,7 +25,7 @@ function AppWithContext() {
       try {
         const token = localStorage.getItem('token');
         if (token) {
-          const response = await axios.get(`http://localhost:8000/api/check-login/`, {
+          const response = await axios.get(`https://tasktrack-project-django-production.up.railway.app/api/check-login/`, {
             headers: {
               Authorization: `Token ${token}`,
             },

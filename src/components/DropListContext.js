@@ -15,7 +15,7 @@ export const DropListProvider = ({ children }) => {
   const fetchGroups = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:8000/api/groups/', {
+      const response = await axios.get('https://tasktrack-project-django-production.up.railway.app/api/groups/', {
         headers: {
           Authorization: `Token ${token}`,
         },
@@ -29,7 +29,7 @@ export const DropListProvider = ({ children }) => {
   const fetchLists = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:8000/api/lists/', {
+      const response = await axios.get('https://tasktrack-project-django-production.up.railway.app/api/lists/', {
         headers: {
           Authorization: `Token ${token}`,
         },

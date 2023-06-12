@@ -21,7 +21,7 @@ const GroupForm = ({ show, handleButtonClick }) => {
 
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.post(`http://localhost:8000/api/groups/`, {
+            const response = await axios.post(`https://tasktrack-project-django-production.up.railway.app/api/groups/`, {
                 name: name,
             }, {
                 headers: {

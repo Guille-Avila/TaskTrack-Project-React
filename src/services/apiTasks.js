@@ -3,7 +3,7 @@ import axios from 'axios';
 export const fetchTasks = async () => {
     try {
         const token = localStorage.getItem('token');
-        const response = await axios.get('http://localhost:8000/api/tasks/?done=false', {
+        const response = await axios.get('https://tasktrack-project-django-production.up.railway.app/api/tasks/?done=false', {
             headers: {
                 Authorization: `Token ${token}`,
             },
@@ -18,7 +18,7 @@ export const fetchTasks = async () => {
 export const fetchDoneTasks = async () => {
     try {
         const token = localStorage.getItem('token');
-        const response = await axios.get('http://localhost:8000/api/tasks/?done=true', {
+        const response = await axios.get('https://tasktrack-project-django-production.up.railway.app/api/tasks/?done=true', {
             headers: {
                 Authorization: `Token ${token}`,
             },

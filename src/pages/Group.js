@@ -49,7 +49,7 @@ function Group() {
     const fetchGroup = async () => {
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.get(`http://localhost:8000/api/groups/${id}/`, {
+            const response = await axios.get(`https://tasktrack-project-django-production.up.railway.app/api/groups/${id}/`, {
                 headers: {
                     Authorization: `Token ${token}`,
                 },

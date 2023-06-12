@@ -36,7 +36,7 @@ const TaskList = ({ tasks, taskMessage, fetchChanges }) => {
         try {
             const date = new Date();
             const token = localStorage.getItem('token');
-            const response = await axios.put(`http://localhost:8000/api/tasks/${task.id}/`, {
+            const response = await axios.put(`https://tasktrack-project-django-production.up.railway.app/api/tasks/${task.id}/`, {
                 title: task.title,
                 done: true,
                 done_date: date.toISOString()
@@ -58,7 +58,7 @@ const TaskList = ({ tasks, taskMessage, fetchChanges }) => {
         // event.preventDefault();
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.delete(`http://localhost:8000/api/tasks/${task.id}/`, {
+            const response = await axios.delete(`https://tasktrack-project-django-production.up.railway.app/api/tasks/${task.id}/`, {
                 headers: {
                     Authorization: `Token ${token}`,
                 },
